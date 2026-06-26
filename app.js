@@ -1,270 +1,59 @@
-const TOTAL_QUESTIONS = 60;
-const CHOICES = ["ア", "イ", "ウ", "エ"];
-const STORAGE_KEY = "fe_completion_exam_answers_v1";
-const MARK_KEY = "fe_completion_exam_marks_v1";
-const START_KEY = "fe_completion_exam_started_at_v1";
+const state={filter:"すべて",query:"",onlyUnlearned:false,done:new Set(JSON.parse(localStorage.getItem("fe-done")||"[]"))};
+const fields=["すべて",...new Set(QUESTIONS.map(x=>x.field))];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-const state = {
-  current: 1,
-  filter: "all",
-  zoom: 100,
-  answers: loadJson(STORAGE_KEY, {}),
-  marks: loadJson(MARK_KEY, {}),
-};
+const box=(text,cls="")=>`<div class="v-box ${cls}">${esc(text)}</div>`;
+const arrow=(label="")=>`<div class="v-arrow"><i>→</i>${label?`<small>${esc(label)}</small>`:""}</div>`;
+const flow=(parts)=>`<div class="v-flow">${parts.map((x,i)=>`${i?arrow():""}${box(x,i===parts.length-1?"focus":"")}`).join("")}</div>`;
+const stack=(layers)=>`<div class="v-stack">${layers.map((x,i)=>`<div style="--i:${i}">${esc(x)}</div>`).join("")}</div>`;
+const cycle=(items)=>`<div class="v-cycle">${items.map((x,i)=>`<div><b>${i+1}</b><span>${esc(x)}</span></div>`).join("")}</div>`;
+const formula=(top,bottom)=>`<div class="v-formula"><strong>${esc(top)}</strong><span>${esc(bottom)}</span></div>`;
+const compare=(leftTitle,left,rightTitle,right)=>`<div class="v-compare"><section><h4>${esc(leftTitle)}</h4>${left.map(x=>`<p>${esc(x)}</p>`).join("")}</section><b>VS</b><section class="good"><h4>${esc(rightTitle)}</h4>${right.map(x=>`<p>${esc(x)}</p>`).join("")}</section></div>`;
 
-const els = {
-  grid: document.getElementById("questionGrid"),
-  image: document.getElementById("questionImage"),
-  title: document.getElementById("questionTitle"),
-  progressText: document.getElementById("progressText"),
-  progressFill: document.getElementById("progressFill"),
-  timerText: document.getElementById("timerText"),
-  markButton: document.getElementById("markButton"),
-  prevButton: document.getElementById("prevButton"),
-  nextButton: document.getElementById("nextButton"),
-  clearButton: document.getElementById("clearButton"),
-  zoomInButton: document.getElementById("zoomInButton"),
-  zoomOutButton: document.getElementById("zoomOutButton"),
-  zoomText: document.getElementById("zoomText"),
-  reviewButton: document.getElementById("reviewButton"),
-  resetButton: document.getElementById("resetButton"),
-  reviewDialog: document.getElementById("reviewDialog"),
-  reviewList: document.getElementById("reviewList"),
-  copyButton: document.getElementById("copyButton"),
-  tabs: Array.from(document.querySelectorAll(".tab")),
-  choiceButtons: Array.from(document.querySelectorAll(".choice-button")),
-};
+function autoDiagram(q){
+  const parts=Array.isArray(q.diagram)&&q.diagram.length?q.diagram:[q.title,q.answerText];
+  if(q.field==="基礎理論"||q.field==="会計")return formula(parts[0],parts.slice(1).join(" → "));
+  if(q.field==="データベース"||q.field==="ネットワーク")return flow(parts);
+  if(q.field==="セキュリティ")return cycle(parts);
+  if(q.field==="ストラテジ"||q.field==="マネジメント")return stack(parts);
+  if(q.field==="開発技術"||q.field==="プログラミング")return flow(parts);
+  if(q.field==="システム"||q.field==="コンピュータ")return flow(parts);
+  return flow(parts);
+}
 
-function loadJson(key, fallback) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) || fallback;
-  } catch {
-    return fallback;
+function richVisual(q){
+  switch(q.n){
+    case 1:return compare("桁落ち",["近い値同士の減算","有効桁が減る"],"情報落ち",["大きい値と小さい値の加算","小さい値が丸めで消える"]);
+    case 2:return `<div class="v-formula"><strong>正規分布</strong><span>平均を中心に左右対称</span><span>釣鐘形</span><span>連続確率分布</span></div>`;
+    case 4:return formula("2秒 × (1000/100)^3 ÷ 4","= 2 × 1000 ÷ 4 = 500秒");
+    case 5:return flow(["A,B,Cをpush","Cをpop","Bをpop","Dをpush","D,Aをpop"]);
+    case 6:return formula("比較ごとに候補が1/2","n → n/2 → n/4 → ... → 1 なので log2 n");
+    case 8:return formula("平均CPI = 4×0.3 + 8×0.6 + 10×0.1 = 7","700MHz ÷ 7 = 100MIPS");
+    case 10:return formula("1024×768×24bit ÷ 8","= 2,359,296byte ≒ 2.4Mbyte");
+    case 16:return flow(["A xor B","C xor D","2つをxor","NOT","偶数個の1で出力1"]);
+    case 19:return compare("元の表",["注文番号+商品番号がキー","商品番号→商品名"],"第3正規形",["発注明細を残す","商品表を分離"]);
+    case 20:return flow(["商品を1件見る","在庫に同じ商品番号があるか","NOT EXISTS","無い商品だけ出力"]);
+    case 22:return compare("両立する",["共有×共有"],"待たされる",["共有×排他","排他×共有","排他×排他"]);
+    case 23:return formula("100Mbyte = 800Mbit","800 ÷ (10×0.75) = 106.7秒");
+    case 24:return stack(["アプリケーション層","トランスポート層","インターネット層 ← 装置Aが扱う","リンク層","ハードウェア層"]);
+    case 25:return formula("255.255.255.240 = /28","ブロックサイズ16、146は144〜159に含まれる");
+    case 28:return flow(["データを鍵Aで暗号化","鍵Aを鍵Bで暗号化","暗号文+暗号化済み鍵を保管"]);
+    case 29:return compare("通常条件",["普段の端末","普段の場所"],"高リスク条件",["未知の端末","追加認証を要求"]);
+    case 30:return compare("ITガバナンス",["IT活用全体"],"情報セキュリティガバナンス",["情報保護の統制","範囲は重複し得る"]);
+    case 38:return formula("2000×0.04=80件","80×20%×20%×200万円=640万円");
+    case 41:return formula("人月÷人数を工程ごとに計算","2+2+2+6+2=14か月");
+    case 42:return flow(["PV","EV","AC","CPIでコスト","SPIでスケジュール"]);
+    case 43:return compare("コールドスタート",["初期状態から起動","IPL"],"ロールバック/フォワード",["ログやコピーで回復"]);
+    case 49:return flow(["他社を買収・合併","技術・人材・顧客を取得","事業拡大や再編に活用"]);
+    case 50:return stack(["導入期: 認知を高める","成長期: 売上急増・競争激化","成熟期: 伸び鈍化","衰退期: 売上減少"]);
+    case 51:return compare("顧客の視点",["顧客満足","クレーム件数","継続関係"],"他の視点",["財務","内部プロセス","学習と成長"]);
+    case 54:return compare("技術的アプローチ",["CAD/CAM/CAE"],"組織的アプローチ",["設計と生産を並行","コンカレントエンジニアリング"]);
+    case 57:return formula("当初: S + E = 最大在庫量","変更後はXから始まるので X−S 分を取消");
+    case 58:return compare("ヒストグラム",["階級ごとの度数","分布を見る"],"パレート図",["降順の棒","累積比率を見る"]);
+    case 59:return formula("販売数=-30×1000+90000=60000","(1000−400)×60000−1000000=35000000");
+    case 60:return flow(["派遣元が労働者を雇用","派遣元と派遣先が派遣契約","派遣先が指揮命令"]);
+    default:return autoDiagram(q);
   }
 }
-
-function saveJson(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-function padQuestion(num) {
-  return String(num).padStart(2, "0");
-}
-
-function questionImagePath(num) {
-  return `assets/mon${padQuestion(num)}.png`;
-}
-
-function ensureTimerStart() {
-  if (!localStorage.getItem(START_KEY)) {
-    localStorage.setItem(START_KEY, String(Date.now()));
-  }
-}
-
-function formatElapsed(ms) {
-  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  if (hours > 0) {
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-  }
-  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-}
-
-function updateTimer() {
-  const startedAt = Number(localStorage.getItem(START_KEY) || Date.now());
-  els.timerText.textContent = formatElapsed(Date.now() - startedAt);
-}
-
-function buildGrid() {
-  els.grid.innerHTML = "";
-  for (let i = 1; i <= TOTAL_QUESTIONS; i += 1) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "q-cell";
-    button.textContent = i;
-    button.dataset.question = String(i);
-    button.addEventListener("click", () => setCurrent(i));
-    els.grid.appendChild(button);
-  }
-}
-
-function visibleByFilter(num) {
-  if (state.filter === "unanswered") return !state.answers[num];
-  if (state.filter === "marked") return Boolean(state.marks[num]);
-  return true;
-}
-
-function renderGrid() {
-  Array.from(els.grid.children).forEach((button) => {
-    const num = Number(button.dataset.question);
-    button.classList.toggle("current", num === state.current);
-    button.classList.toggle("answered", Boolean(state.answers[num]));
-    button.classList.toggle("marked", Boolean(state.marks[num]));
-    button.hidden = !visibleByFilter(num);
-    const answer = state.answers[num] ? ` 回答${state.answers[num]}` : " 未回答";
-    const mark = state.marks[num] ? " 見直し" : "";
-    button.setAttribute("aria-label", `問${num}${answer}${mark}`);
-  });
-}
-
-function renderProgress() {
-  const answered = Object.keys(state.answers).filter((key) => state.answers[key]).length;
-  const percent = Math.round((answered / TOTAL_QUESTIONS) * 100);
-  els.progressText.textContent = `${answered} / ${TOTAL_QUESTIONS}`;
-  els.progressFill.style.width = `${percent}%`;
-}
-
-function renderQuestion() {
-  els.title.textContent = `問${state.current}`;
-  els.image.src = questionImagePath(state.current);
-  els.image.alt = `問${state.current}の問題画像`;
-  els.image.style.setProperty("--image-width", `${state.zoom}%`);
-  els.zoomText.textContent = `${state.zoom}%`;
-  els.markButton.classList.toggle("active", Boolean(state.marks[state.current]));
-  els.markButton.textContent = state.marks[state.current] ? "見直し中" : "見直し";
-  els.prevButton.disabled = state.current === 1;
-  els.nextButton.disabled = state.current === TOTAL_QUESTIONS;
-
-  els.choiceButtons.forEach((button) => {
-    button.classList.toggle("selected", state.answers[state.current] === button.dataset.choice);
-  });
-}
-
-function renderTabs() {
-  els.tabs.forEach((tab) => {
-    tab.classList.toggle("active", tab.dataset.filter === state.filter);
-  });
-}
-
-function render() {
-  renderQuestion();
-  renderGrid();
-  renderProgress();
-  renderTabs();
-}
-
-function setCurrent(num) {
-  state.current = Math.min(TOTAL_QUESTIONS, Math.max(1, num));
-  render();
-}
-
-function answerCurrent(choice) {
-  state.answers[state.current] = choice;
-  saveJson(STORAGE_KEY, state.answers);
-  if (state.current < TOTAL_QUESTIONS) {
-    state.current += 1;
-  }
-  render();
-}
-
-function clearCurrent() {
-  delete state.answers[state.current];
-  saveJson(STORAGE_KEY, state.answers);
-  render();
-}
-
-function toggleMark() {
-  if (state.marks[state.current]) {
-    delete state.marks[state.current];
-  } else {
-    state.marks[state.current] = true;
-  }
-  saveJson(MARK_KEY, state.marks);
-  render();
-}
-
-function setZoom(nextZoom) {
-  state.zoom = Math.min(160, Math.max(70, nextZoom));
-  renderQuestion();
-}
-
-function buildReviewList() {
-  els.reviewList.innerHTML = "";
-  for (let i = 1; i <= TOTAL_QUESTIONS; i += 1) {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "review-item";
-    item.innerHTML = `<strong>問${i}</strong><span>${state.answers[i] || "未回答"}${state.marks[i] ? " / 見直し" : ""}</span>`;
-    item.addEventListener("click", () => {
-      state.current = i;
-      els.reviewDialog.close();
-      render();
-    });
-    els.reviewList.appendChild(item);
-  }
-}
-
-function exportCsv() {
-  const rows = ["question,answer,marked"];
-  for (let i = 1; i <= TOTAL_QUESTIONS; i += 1) {
-    rows.push(`${i},${state.answers[i] || ""},${state.marks[i] ? "1" : "0"}`);
-  }
-  return rows.join("\n");
-}
-
-function resetAll() {
-  const ok = window.confirm("解答、見直し、タイマーをリセットしますか。");
-  if (!ok) return;
-  state.answers = {};
-  state.marks = {};
-  state.current = 1;
-  localStorage.removeItem(STORAGE_KEY);
-  localStorage.removeItem(MARK_KEY);
-  localStorage.setItem(START_KEY, String(Date.now()));
-  render();
-  updateTimer();
-}
-
-function bindEvents() {
-  els.choiceButtons.forEach((button) => {
-    button.addEventListener("click", () => answerCurrent(button.dataset.choice));
-  });
-
-  els.prevButton.addEventListener("click", () => setCurrent(state.current - 1));
-  els.nextButton.addEventListener("click", () => setCurrent(state.current + 1));
-  els.clearButton.addEventListener("click", clearCurrent);
-  els.markButton.addEventListener("click", toggleMark);
-  els.zoomInButton.addEventListener("click", () => setZoom(state.zoom + 10));
-  els.zoomOutButton.addEventListener("click", () => setZoom(state.zoom - 10));
-  els.resetButton.addEventListener("click", resetAll);
-
-  els.tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      state.filter = tab.dataset.filter;
-      render();
-    });
-  });
-
-  els.reviewButton.addEventListener("click", () => {
-    buildReviewList();
-    els.reviewDialog.showModal();
-  });
-
-  els.copyButton.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(exportCsv());
-    els.copyButton.textContent = "コピー済み";
-    window.setTimeout(() => {
-      els.copyButton.textContent = "CSVをコピー";
-    }, 1200);
-  });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
-    if (event.key === "ArrowLeft") setCurrent(state.current - 1);
-    if (event.key === "ArrowRight") setCurrent(state.current + 1);
-    if (event.key === "m") toggleMark();
-    const index = Number(event.key) - 1;
-    if (index >= 0 && index < CHOICES.length) {
-      answerCurrent(CHOICES[index]);
-    }
-  });
-}
-
-ensureTimerStart();
-buildGrid();
-bindEvents();
-render();
-updateTimer();
-window.setInterval(updateTimer, 1000);
+window.renderRichVisual=richVisual;
