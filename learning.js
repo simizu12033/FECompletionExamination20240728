@@ -6,7 +6,8 @@ const STORAGE={
   done:`${STORAGE_PREFIX}-done`,
   report:`${STORAGE_PREFIX}-first-report`,
   retryAnswers:`${STORAGE_PREFIX}-retry-answers`,
-  retryChecked:`${STORAGE_PREFIX}-retry-checked`
+  retryChecked:`${STORAGE_PREFIX}-retry-checked`,
+  revealed:`${STORAGE_PREFIX}-revealed`
 };
 
 // 旧版の保存データがあれば、新しい教材専用キーへ一度だけ引き継ぐ。
@@ -24,6 +25,7 @@ const learningState={
   answers:JSON.parse(localStorage.getItem(STORAGE.answers)||"{}"),
   retryAnswers:JSON.parse(localStorage.getItem(STORAGE.retryAnswers)||"{}"),
   retryChecked:JSON.parse(localStorage.getItem(STORAGE.retryChecked)||"{}"),
+  revealed:new Set(JSON.parse(localStorage.getItem(STORAGE.revealed)||"[]")),
   understood:new Set(JSON.parse(localStorage.getItem(STORAGE.done)||"[]")),
   filter:"すべて",
   query:"",
@@ -54,6 +56,7 @@ const saveLearning=()=>{
   localStorage.setItem(STORAGE.answers,JSON.stringify(learningState.answers));
   localStorage.setItem(STORAGE.retryAnswers,JSON.stringify(learningState.retryAnswers));
   localStorage.setItem(STORAGE.retryChecked,JSON.stringify(learningState.retryChecked));
+  localStorage.setItem(STORAGE.revealed,JSON.stringify([...learningState.revealed]));
   localStorage.setItem(STORAGE.done,JSON.stringify([...learningState.understood]));
 };
 const answeredCount=()=>Object.keys(learningState.answers).length;
@@ -86,9 +89,22 @@ function renderLearning(){
     node.id=`q${q.n}`;
     if(learningState.understood.has(q.n))node.classList.add("understood");
     if(needsRetry(q))node.classList.add("retrying");
+    if(learningState.revealed.has(q.n))node.classList.add("explanation-open");
     node.querySelector(".number").textContent=`Q${String(q.n).padStart(2,"0")}`;
     node.querySelector(".meta").textContent=q.field;
     node.querySelector("h2").textContent=q.title;
+    const revealButton=document.createElement("button");
+    revealButton.type="button";
+    revealButton.className="explain-toggle";
+    revealButton.setAttribute("aria-expanded",learningState.revealed.has(q.n)?"true":"false");
+    revealButton.textContent=learningState.revealed.has(q.n)?"解説を閉じる":"解説表示";
+    revealButton.onclick=()=>{
+      learningState.revealed.has(q.n)?learningState.revealed.delete(q.n):learningState.revealed.add(q.n);
+      saveLearning();
+      renderLearning();
+      document.querySelector(`#q${q.n}`)?.scrollIntoView({block:"center"});
+    };
+    node.querySelector(".understand-check").before(revealButton);
     const image=node.querySelector(".problem-panel img");
     image.src=`assets/questions/q${String(q.n).padStart(2,"0")}.png`;
     image.alt=`問${q.n}の問題文`;
@@ -136,6 +152,7 @@ function renderLearning(){
 
     node.querySelector(".answer-strip strong").textContent=q.answer;
     node.querySelector(".answer-strip p").textContent=q.answerText;
+    node.querySelector(".answer-strip").hidden=!isReview();
     node.querySelector(".summary").textContent=q.summary;
     node.querySelector(".reasoning").innerHTML=q.reasoning.map(x=>`<li>${x}</li>`).join("");
     node.querySelector(".trap p").textContent=q.trap;
@@ -168,7 +185,7 @@ function updatePhasePanel(){
   qs("#listTitle").textContent=isReview()?"採点結果と解説":"試験問題";
   qs("#phaseMessage").textContent=isReview()
     ?`採点済みです。初回に間違えた問題は選択肢を押して再回答できます。正誤は「再回答を採点する」を押した時だけ表示します。（未解決 ${unresolved}問）`
-    :`${answeredCount()}問回答済み。60問すべて回答すると採点できます。`;
+    :`${answeredCount()}問回答済み。迷った問題は「解説表示」を開いて確認してから、改めて回答できます。60問すべて回答すると採点できます。`;
   document.querySelectorAll(".retry-grade-area").forEach(area=>{
     area.hidden=!isReview()||QUESTIONS.every(q=>!wasWrong(q));
   });
