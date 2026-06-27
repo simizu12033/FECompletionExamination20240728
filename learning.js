@@ -1,5 +1,5 @@
 const qs=s=>document.querySelector(s);
-const STORAGE_PREFIX="tokurei-fe-20260614";
+const STORAGE_PREFIX="tokurei-fe-20240728";
 const STORAGE={
   phase:`${STORAGE_PREFIX}-phase`,
   answers:`${STORAGE_PREFIX}-answers`,
