@@ -104,7 +104,7 @@ function renderLearning(){
       renderLearning();
       document.querySelector(`#q${q.n}`)?.scrollIntoView({block:"center"});
     };
-    node.querySelector(".understand-check").before(revealButton);
+    node.querySelector(".answer-input").after(revealButton);
     const image=node.querySelector(".problem-panel img");
     image.src=`assets/questions/q${String(q.n).padStart(2,"0")}.png`;
     image.alt=`問${q.n}の問題文`;
