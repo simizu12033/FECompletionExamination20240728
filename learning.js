@@ -276,7 +276,12 @@ function renderFirstReport(){
   qs("#retestQuestions").innerHTML=report.wrong.length
     ?report.wrong.map(n=>`<a href="#q${n}">問${n}</a>`).join("")
     :`<span>全問正解でした。60問をもう一度通して定着を確認しましょう。</span>`;
-  qs("#importantWords").innerHTML=IMPORTANT_WORDS.map(([field,...words])=>`<div><b>${field}</b>${words.map(w=>`<span>${w}</span>`).join("")}</div>`).join("");
+  const groupedTerms=TERMS.reduce((acc,t)=>{
+    if(!acc[t.field])acc[t.field]=[];
+    acc[t.field].push(t);
+    return acc;
+  },{});
+  qs("#importantWords").innerHTML=Object.entries(groupedTerms).map(([field,terms])=>`<div><b>${field}</b>${terms.map(t=>`<a href="#termLearning" data-term-ref="${t.id}">${t.term}</a>`).join("")}</div>`).join("");
 }
 
 function jumpUnanswered(){
