@@ -15,6 +15,8 @@
     .source-actions a{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 16px;background:var(--navy);color:#fff;text-decoration:none;font-weight:800}
     .source-actions a.secondary{background:#fff;color:var(--blue);border:1px solid var(--line)}
     .source-note{margin:22px 0;padding:16px 18px;background:#fff8e1;border-left:6px solid var(--yellow);border-radius:8px;line-height:1.8}
+    .source-legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+    .source-legend .source-badge{font-size:.76rem}
     .source-table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 44px #2030400f}
     .source-table{width:100%;border-collapse:collapse;min-width:1180px;font-size:.88rem}
     .source-table th,.source-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
@@ -25,12 +27,22 @@
     .source-link{font-weight:800;color:var(--blue)}
     .candidate-title{margin:.35rem 0;color:#334}
     .score{margin:.25rem 0 0;color:var(--muted);font-size:.78rem}
+    .source-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:.3rem 0}
+    .source-badge{display:inline-grid;place-items:center;border-radius:999px;padding:3px 9px;margin:0 6px 3px 0;font-weight:800;font-size:.72rem;line-height:1.5;border:1px solid transparent;white-space:nowrap}
+    .source-badge.ap{background:#e3efff;color:#134a8e;border-color:#bdd8ff}
+    .source-badge.sg{background:#e6f7ed;color:#17603b;border-color:#b9e8ce}
+    .source-badge.menjo{background:#fff0c9;color:#684800;border-color:#f2d47a}
+    .source-badge.public{background:#f0e8ff;color:#59309b;border-color:#d6c4ff}
+    .source-badge.sample{background:#ffe5dc;color:#8a2d17;border-color:#ffc3b2}
+    .source-badge.fe{background:#eef2f4;color:#364754;border-color:#d8e0e4}
+    .source-badge.other{background:#f5f5f5;color:#555;border-color:#ddd}
     .confidence{display:inline-grid;place-items:center;min-width:64px;border-radius:999px;padding:5px 10px;font-weight:800;font-size:.78rem}
     .confidence.high{background:#dff4ed;color:#173f35}
     .confidence.mid{background:#fff0c9;color:#604400}
     .confidence.low{background:#ffe1db;color:#79291e}
     .alt-list{margin:0;padding-left:1.2rem}
     .alt-list li{margin:0 0 .55rem}
+    .alt-list .source-badge{margin-left:-1.2rem}
     .alt-list span{display:block;color:var(--muted);font-size:.8rem}
   </style>
 </head>
@@ -53,6 +65,9 @@
       確度「高」は自動照合の一致度が比較的高い候補、「確定」は問題文・選択肢・出題履歴を追加確認して手動で確定寄せした候補です。
       「類題」は完全一致ではないものの、選択肢構成や出題履歴が近い参考候補です。最終的に「いつのどの試験の問Xか」を見るときは、掲載ページだけでなく「出題履歴」欄も確認してください。
     </p>
+    <div class="source-legend" aria-label="出典種別の凡例">
+      <span class="source-badge ap">応用情報</span><span class="source-badge sg">セキュリティマネジメント</span><span class="source-badge menjo">修了試験</span><span class="source-badge public">公開問題</span><span class="source-badge sample">サンプル問題</span><span class="source-badge fe">基本情報</span>
+    </div>
     <div class="source-table-wrap">
       <table class="source-table">
         <thead>
@@ -72,14 +87,15 @@
       <td>浮動小数点の情報落ち</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/07_haru/a2.html">fe-siken.com 令和7年春期 問2</a>
+        <span class="source-badge public">公開問題</span><a class="source-link" href="https://www.fe-siken.com/kakomon/07_haru/a2.html">fe-siken.com 令和7年春期 問2</a>
         <p class="candidate-title">丸め誤差の説明はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge public">公開問題</span><span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H13秋期 問7 基本情報技術者 H17秋期 問6 基本情報技術者 H19秋期 問4</p>
         
         <p class="score">照合スコア: 105</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/19_aki/q4.html">fe-siken.com 平成19年秋期 問4</a><span>丸め誤差</span></li><li><a href="https://www.fe-siken.com/kakomon/17_aki/q6.html">fe-siken.com 平成17年秋期 問6</a><span>丸め誤差</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/19_aki/q4.html">fe-siken.com 平成19年秋期 問4</a><span>丸め誤差</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/17_aki/q6.html">fe-siken.com 平成17年秋期 問6</a><span>丸め誤差</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問2<small>P.4</small></td>
@@ -87,14 +103,15 @@
       <td>正規分布の特徴</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/26_haru/q4.html">fe-siken.com 平成26年春期 問4</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/26_haru/q4.html">fe-siken.com 平成26年春期 問4</a>
         <p class="candidate-title">正規分布の説明として適切なもの</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         
         
         <p class="score">照合スコア: 215</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/01_aki/q5.html">fe-siken.com 令和1年秋期 問5</a><span>正規分布のグラフ</span></li><li><a href="https://www.fe-siken.com/kakomon/14_haru/q7.html">fe-siken.com 平成14年春期 問7</a><span>正規分布のグラフ</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/01_aki/q5.html">fe-siken.com 令和1年秋期 問5</a><span>正規分布のグラフ</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/14_haru/q7.html">fe-siken.com 平成14年春期 問7</a><span>正規分布のグラフ</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問3<small>P.4</small></td>
@@ -102,14 +119,15 @@
       <td>ディープラーニングに関係が深いもの</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q3.html">fe-siken.com 令和6年度 午前免除試験 問3</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q3.html">fe-siken.com 令和6年度 午前免除試験 問3</a>
         <p class="candidate-title">ディープラーニングに関連が深いもの</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問3</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 R3秋期 問3</p>
         
         <p class="score">照合スコア: 145</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/03_aki/q3.html">ap-siken.com 令和3年秋期 問3</a><span>ディープラーニングに関連が深いもの</span></li><li><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q3.html">fe-siken.com 令和6年度 午前免除試験 問3</a><span>問3 解説へ AIにおけるディープラーニングに最も関連が深いものはどれか。 ある特定の分野に特化した知識を基にルールベースの推論を行うことによって，専門家と同じレベルの問題解決を行...</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/03_aki/q3.html">ap-siken.com 令和3年秋期 問3</a><span>ディープラーニングに関連が深いもの</span></li><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q3.html">fe-siken.com 令和6年度 午前免除試験 問3</a><span>問3 解説へ AIにおけるディープラーニングに最も関連が深いものはどれか。 ある特定の分野に特化した知識を基にルールベースの推論を行うことによって，専門家と同じレベルの問題解決を行...</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問4<small>P.5</small></td>
@@ -117,14 +135,15 @@
       <td>連立一次方程式の計算時間</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/23_aki/q3.html">fe-siken.com 平成23年秋期 問3</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/23_aki/q3.html">fe-siken.com 平成23年秋期 問3</a>
         <p class="candidate-title">連立一次方程式の計算時間</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H15秋期 問5 基本情報技術者 H17秋期 問7 基本情報技術者 H19秋期 問5 ソフトウェア開発技術者 H19秋期 問3</p>
         <p><strong>確認メモ:</strong> 問題タイトルと計算条件が一致。出題履歴にFE H15秋 問5、H17秋 問7、H19秋 問5、SW H19秋 問3。</p>
         <p class="score">照合スコア: 77</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/19_aki/q5.html">fe-siken.com 平成19年秋期 問5</a><span>連立一次方程式の計算時間</span></li><li><a href="https://www.fe-siken.com/kakomon/17_aki/q7.html">fe-siken.com 平成17年秋期 問7</a><span>連立一次方程式の計算時間</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/19_aki/q5.html">fe-siken.com 平成19年秋期 問5</a><span>連立一次方程式の計算時間</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/17_aki/q7.html">fe-siken.com 平成17年秋期 問7</a><span>連立一次方程式の計算時間</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問5<small>P.5</small></td>
@@ -132,14 +151,15 @@
       <td>スタックで出力できる順序</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/29_aki/q5.html">fe-siken.com 平成29年秋期 問5</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/29_aki/q5.html">fe-siken.com 平成29年秋期 問5</a>
         <p class="candidate-title">スタックで出力可能なデータ列</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H16春期 問12 基本情報技術者 H22秋期 問5</p>
         
         <p class="score">照合スコア: 101</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/22_aki/q5.html">fe-siken.com 平成22年秋期 問5</a><span>スタックで出力可能なデータ列</span></li><li><a href="https://www.fe-siken.com/kakomon/16_haru/q12.html">fe-siken.com 平成16年春期 問12</a><span>スタックで出力可能なデータ列</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_aki/q5.html">fe-siken.com 平成22年秋期 問5</a><span>スタックで出力可能なデータ列</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/16_haru/q12.html">fe-siken.com 平成16年春期 問12</a><span>スタックで出力可能なデータ列</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問6<small>P.5</small></td>
@@ -147,14 +167,15 @@
       <td>二分探索のおよその比較回数</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/21_haru/q7.html">fe-siken.com 平成21年春期 問7</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/21_haru/q7.html">fe-siken.com 平成21年春期 問7</a>
         <p class="candidate-title">2分探索法の比較回数</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H18秋期 問14</p>
         
         <p class="score">照合スコア: 100</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/18_aki/q14.html">fe-siken.com 平成18年秋期 問14</a><span>2分探索法の比較回数</span></li><li><a href="https://www.fe-siken.com/kakomon/26_aki/q6.html">fe-siken.com 平成26年秋期 問6</a><span>2分探索法</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/18_aki/q14.html">fe-siken.com 平成18年秋期 問14</a><span>2分探索法の比較回数</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/26_aki/q6.html">fe-siken.com 平成26年秋期 問6</a><span>2分探索法</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問7<small>P.6</small></td>
@@ -162,14 +183,15 @@
       <td>関数呼出し時の実引数と仮引数</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/20_aki/q39.html">fe-siken.com 平成20年秋期 問39</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/20_aki/q39.html">fe-siken.com 平成20年秋期 問39</a>
         <p class="candidate-title">関数呼出し時の引数の性質</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         
         
         <p class="score">照合スコア: 236</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/28_haru/q20.html">ap-siken.com 平成28年春期 問20</a><span>値呼出しと参照呼出し</span></li><li><a href="https://www.ap-siken.com/kakomon/25_haru/q20.html">ap-siken.com 平成25年春期 問20</a><span>値呼出しと参照呼出し</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_haru/q20.html">ap-siken.com 平成28年春期 問20</a><span>値呼出しと参照呼出し</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/25_haru/q20.html">ap-siken.com 平成25年春期 問20</a><span>値呼出しと参照呼出し</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問8<small>P.6</small></td>
@@ -177,14 +199,15 @@
       <td>CPU性能のMIPS計算</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q9.html">fe-siken.com 平成30年秋期 問9</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q9.html">fe-siken.com 平成30年秋期 問9</a>
         <p class="candidate-title">CPUの性能は約何MIPSか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H22秋期 問9 基本情報技術者 H17秋期 問19 基本情報技術者 H29春期 問8</p>
         
         <p class="score">照合スコア: 169</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/29_haru/q8.html">fe-siken.com 平成29年春期 問8</a><span>CPUの性能は約何MIPSか</span></li><li><a href="https://www.fe-siken.com/kakomon/17_aki/q19.html">fe-siken.com 平成17年秋期 問19</a><span>CPUの性能は約何MIPSか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/29_haru/q8.html">fe-siken.com 平成29年春期 問8</a><span>CPUの性能は約何MIPSか</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/17_aki/q19.html">fe-siken.com 平成17年秋期 問19</a><span>CPUの性能は約何MIPSか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問9<small>P.6</small></td>
@@ -192,14 +215,15 @@
       <td>キャッシュミス時の動作</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/25_aki/q10.html">fe-siken.com 平成25年秋期 問10</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/25_aki/q10.html">fe-siken.com 平成25年秋期 問10</a>
         <p class="candidate-title">キャッシュメモリ制御</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H23秋期 問11 ソフトウェア開発技術者 H20春期 問18</p>
         
         <p class="score">照合スコア: 170</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/23_aki/q11.html">ap-siken.com 平成23年秋期 問11</a><span>メモリ制御</span></li><li><a href="https://www.ap-siken.com/kakomon/20_haru/q18.html">ap-siken.com 平成20年春期 問18</a><span>キャッシュメモリ制御</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/23_aki/q11.html">ap-siken.com 平成23年秋期 問11</a><span>メモリ制御</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/20_haru/q18.html">ap-siken.com 平成20年春期 問18</a><span>キャッシュメモリ制御</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問10<small>P.7</small></td>
@@ -207,14 +231,15 @@
       <td>画面表示に必要なビデオメモリ</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.ap-siken.com/kakomon/20_haru/q21.html">ap-siken.com 平成20年春期 問21</a>
+        <span class="source-badge ap">応用情報</span><a class="source-link" href="https://www.ap-siken.com/kakomon/20_haru/q21.html">ap-siken.com 平成20年春期 問21</a>
         <p class="candidate-title">画面表示に必要なメモリ量</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge ap">応用情報</span><span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H14春期 問29 基本情報技術者 H15秋期 問28</p>
         
         <p class="score">照合スコア: 109</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/03_menjo/q14.html">fe-siken.com 令和3年度 午前免除試験 問14</a><span>画面表示に必要なメモリ量</span></li><li><a href="https://www.fe-siken.com/kakomon/15_aki/q28.html">fe-siken.com 平成15年秋期 問28</a><span>画面表示に必要なメモリ量</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/03_menjo/q14.html">fe-siken.com 令和3年度 午前免除試験 問14</a><span>画面表示に必要なメモリ量</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/15_aki/q28.html">fe-siken.com 平成15年秋期 問28</a><span>画面表示に必要なメモリ量</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問11<small>P.7</small></td>
@@ -222,14 +247,15 @@
       <td>フォールトトレラントシステム</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/25_haru/q14.html">fe-siken.com 平成25年春期 問14</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/25_haru/q14.html">fe-siken.com 平成25年春期 問14</a>
         <p class="candidate-title">フォールトトレラントシステム</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H19春期 問34 基本情報技術者 H21春期 問15</p>
         
         <p class="score">照合スコア: 201</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/21_haru/q15.html">fe-siken.com 平成21年春期 問15</a><span>フォールトトレラントシステム</span></li><li><a href="https://www.fe-siken.com/kakomon/19_haru/q34.html">fe-siken.com 平成19年春期 問34</a><span>フォールトトレラントシステム</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/21_haru/q15.html">fe-siken.com 平成21年春期 問15</a><span>フォールトトレラントシステム</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/19_haru/q34.html">fe-siken.com 平成19年春期 問34</a><span>フォールトトレラントシステム</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問12<small>P.7</small></td>
@@ -237,14 +263,15 @@
       <td>スループット</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/20_aki/q33.html">fe-siken.com 平成20年秋期 問33</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/20_aki/q33.html">fe-siken.com 平成20年秋期 問33</a>
         <p class="candidate-title">スループットの説明</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H24春期 問18 ソフトウェア開発技術者 H16春期 問36</p>
         
         <p class="score">照合スコア: 155</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/25_haru/q16.html">fe-siken.com 平成25年春期 問16</a><span>スループット</span></li><li><a href="https://www.ap-siken.com/kakomon/24_haru/q18.html">ap-siken.com 平成24年春期 問18</a><span>スループットの説明</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/25_haru/q16.html">fe-siken.com 平成25年春期 問16</a><span>スループット</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/24_haru/q18.html">ap-siken.com 平成24年春期 問18</a><span>スループットの説明</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問13<small>P.7</small></td>
@@ -252,14 +279,15 @@
       <td>仮想記憶のページ</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/19_haru/q28.html">fe-siken.com 平成19年春期 問28</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/19_haru/q28.html">fe-siken.com 平成19年春期 問28</a>
         <p class="candidate-title">ページング方式</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H16春期 問30</p>
         
         <p class="score">照合スコア: 272</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/16_haru/q30.html">fe-siken.com 平成16年春期 問30</a><span>仮想記憶方式</span></li><li><a href="https://www.fe-siken.com/kakomon/24_aki/q18.html">fe-siken.com 平成24年秋期 問18</a><span>フラグメンテーション</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/16_haru/q30.html">fe-siken.com 平成16年春期 問30</a><span>仮想記憶方式</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/24_aki/q18.html">fe-siken.com 平成24年秋期 問18</a><span>フラグメンテーション</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問14<small>P.8</small></td>
@@ -267,14 +295,15 @@
       <td>コンパイラの最適化目的</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/02_menjo/q18.html">fe-siken.com 令和2年度 午前免除試験 問18</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/02_menjo/q18.html">fe-siken.com 令和2年度 午前免除試験 問18</a>
         <p class="candidate-title">コンパイラによる最適化の主な目的</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge fe">基本情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和2年7月 問18</p>
         <p><strong>出題履歴:</strong> 基本情報技術者 H30春期 問18</p>
         
         <p class="score">照合スコア: 160</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/30_haru/q18.html">fe-siken.com 平成30年春期 問18</a><span>コンパイラによる最適化の主な目的</span></li><li><a href="https://www.fe-siken.com/kakomon/22_aki/q22.html">fe-siken.com 平成22年秋期 問22</a><span>コンパイラによる最適化の主な目的</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/30_haru/q18.html">fe-siken.com 平成30年春期 問18</a><span>コンパイラによる最適化の主な目的</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_aki/q22.html">fe-siken.com 平成22年秋期 問22</a><span>コンパイラによる最適化の主な目的</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問15<small>P.8</small></td>
@@ -282,14 +311,15 @@
       <td>オープンソースソフトウェアの特徴</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q15.html">fe-siken.com 令和6年度 午前免除試験 問15</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q15.html">fe-siken.com 令和6年度 午前免除試験 問15</a>
         <p class="candidate-title">オープンソースソフトウェア</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問15</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 H22秋期 問21</p>
         
         <p class="score">照合スコア: 91</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q15.html">fe-siken.com 令和6年度 午前免除試験 問15</a><span>問15 解説へ オープンソースソフトウェアの特徴のうち，適切なものはどれか。 一定の条件の下で，ソースコードの変更を許可している。 使用分野及び利用者を制限して再配布できる。 著作...</span></li><li><a href="https://www.ap-siken.com/kakomon/22_aki/q21.html">ap-siken.com 平成22年秋期 問21</a><span>オープンソースソフトウェア</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q15.html">fe-siken.com 令和6年度 午前免除試験 問15</a><span>問15 解説へ オープンソースソフトウェアの特徴のうち，適切なものはどれか。 一定の条件の下で，ソースコードの変更を許可している。 使用分野及び利用者を制限して再配布できる。 著作...</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/22_aki/q21.html">ap-siken.com 平成22年秋期 問21</a><span>オープンソースソフトウェア</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問16<small>P.8</small></td>
@@ -297,14 +327,15 @@
       <td>偶数パリティを判定する論理回路</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/23_toku/q24.html">fe-siken.com 平成23年特別試験 問24</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/23_toku/q24.html">fe-siken.com 平成23年特別試験 問24</a>
         <p class="candidate-title">論理回路図</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H13秋期 問16 基本情報技術者 H17秋期 問16 基本情報技術者 H20秋期 問17</p>
         <p><strong>確認メモ:</strong> 問題文の「4ビットの入力データ」「1の入力数が0個又は偶数個」が一致。</p>
         <p class="score">照合スコア: 手動確認</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/19_haru/q9.html">fe-siken.com 平成19年春期 問9</a><span>条件文と同値なもの</span></li><li><a href="https://www.fe-siken.com/kakomon/14_haru/q8.html">fe-siken.com 平成14年春期 問8</a><span>等式a＝bと同じことを表すもの</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/19_haru/q9.html">fe-siken.com 平成19年春期 問9</a><span>条件文と同値なもの</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/14_haru/q8.html">fe-siken.com 平成14年春期 問8</a><span>等式a＝bと同じことを表すもの</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問17<small>P.9</small></td>
@@ -312,14 +343,15 @@
       <td>テクスチャマッピング</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/27_haru/q25.html">fe-siken.com 平成27年春期 問25</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/27_haru/q25.html">fe-siken.com 平成27年春期 問25</a>
         <p class="candidate-title">テクスチャマッピング</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H24春期 問25</p>
         
         <p class="score">照合スコア: 99</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/24_haru/q25.html">ap-siken.com 平成24年春期 問25</a><span>テクスチャマッピング</span></li><li><a href="https://www.ap-siken.com/kakomon/01_moshi/q33.html">ap-siken.com 01_moshi 問33</a><span>メタボール</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/24_haru/q25.html">ap-siken.com 平成24年春期 問25</a><span>テクスチャマッピング</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/01_moshi/q33.html">ap-siken.com 01_moshi 問33</a><span>メタボール</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問18<small>P.9</small></td>
@@ -327,14 +359,15 @@
       <td>データウェアハウス</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/18_aki/q35.html">fe-siken.com 平成18年秋期 問35</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/18_aki/q35.html">fe-siken.com 平成18年秋期 問35</a>
         <p class="candidate-title">データウェアハウス</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 初級シスアド H20秋期 問21 基本情報技術者 H22春期 問33</p>
         
         <p class="score">照合スコア: 185</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/22_haru/q33.html">fe-siken.com 平成22年春期 問33</a><span>データウェアハウス</span></li><li><a href="https://www.fe-siken.com/kakomon/06_menjo/q18.html">fe-siken.com 令和6年度 午前免除試験 問18</a><span>データウェアハウス</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_haru/q33.html">fe-siken.com 平成22年春期 問33</a><span>データウェアハウス</span></li><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/06_menjo/q18.html">fe-siken.com 令和6年度 午前免除試験 問18</a><span>データウェアハウス</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問19<small>P.9</small></td>
@@ -342,14 +375,15 @@
       <td>発注伝票表の第3正規形</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q19.html">fe-siken.com 令和6年度 午前免除試験 問19</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q19.html">fe-siken.com 令和6年度 午前免除試験 問19</a>
         <p class="candidate-title">関係データベースの正規化</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge fe">基本情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問19</p>
         <p><strong>出題履歴:</strong> 基本情報技術者 H22春期 問30</p>
         <p><strong>確認メモ:</strong> 問題文の「発注伝票」表と属性列が一致。</p>
         <p class="score">照合スコア: 手動確認</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/22_haru/q46.html">fe-siken.com 平成22年春期 問46</a><span>E-R図</span></li><li><a href="https://www.fe-siken.com/kakomon/07_haru/a6.html">fe-siken.com 令和7年春期 問6</a><span>SQL文</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_haru/q46.html">fe-siken.com 平成22年春期 問46</a><span>E-R図</span></li><li><span class="source-badge public">公開問題</span><a href="https://www.fe-siken.com/kakomon/07_haru/a6.html">fe-siken.com 令和7年春期 問6</a><span>SQL文</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問20<small>P.10</small></td>
@@ -357,14 +391,15 @@
       <td>NOT INと同じ結果のSQL</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/26_haru/q28.html">fe-siken.com 平成26年春期 問28</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/26_haru/q28.html">fe-siken.com 平成26年春期 問28</a>
         <p class="candidate-title">SQL文</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H22春期 問31</p>
         
         <p class="score">照合スコア: 114</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/22_haru/q31.html">fe-siken.com 平成22年春期 問31</a><span>SQL文</span></li><li><a href="https://www.ap-siken.com/kakomon/28_aki/q29.html">ap-siken.com 平成28年秋期 問29</a><span>SQL文のaに入れる字句はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_haru/q31.html">fe-siken.com 平成22年春期 問31</a><span>SQL文</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_aki/q29.html">ap-siken.com 平成28年秋期 問29</a><span>SQL文のaに入れる字句はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問21<small>P.10</small></td>
@@ -372,14 +407,15 @@
       <td>JavaからDBへアクセスする標準API</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/23_toku/q32.html">fe-siken.com 平成23年特別試験 問32</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/23_toku/q32.html">fe-siken.com 平成23年特別試験 問32</a>
         <p class="candidate-title">JDBC</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         
         
         <p class="score">照合スコア: 200</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/17_aki/q37.html">ap-siken.com 平成17年秋期 問37</a><span>Enterprise Java Beans</span></li><li><a href="https://www.ap-siken.com/kakomon/16_haru/q47.html">ap-siken.com 平成16年春期 問47</a><span>J2EEの構成技術</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/17_aki/q37.html">ap-siken.com 平成17年秋期 問37</a><span>Enterprise Java Beans</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/16_haru/q47.html">ap-siken.com 平成16年春期 問47</a><span>J2EEの構成技術</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問22<small>P.11</small></td>
@@ -387,14 +423,15 @@
       <td>共有ロックと排他ロックの並行可否</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q29.html">fe-siken.com 令和4年度 午前免除試験 問29</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q29.html">fe-siken.com 令和4年度 午前免除試験 問29</a>
         <p class="candidate-title">並行実行の可否の組合せ</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和4年1月 問29</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 H30秋期 問30</p>
         <p><strong>確認メモ:</strong> 午前免除試験 令和4年1月 問29。出題履歴はAP H30秋 問30。</p>
         <p class="score">照合スコア: 15</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/30_aki/q30.html">ap-siken.com 平成30年秋期 問30</a><span>並行実行の可否の組合せ</span></li><li><a href="https://www.fe-siken.com/kakomon/01_aki/q29.html">fe-siken.com 令和1年秋期 問29</a><span>デッドロックが発生しない処理順序</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/30_aki/q30.html">ap-siken.com 平成30年秋期 問30</a><span>並行実行の可否の組合せ</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/01_aki/q29.html">fe-siken.com 令和1年秋期 問29</a><span>デッドロックが発生しない処理順序</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問23<small>P.11</small></td>
@@ -402,14 +439,15 @@
       <td>回線伝送時間の計算</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q23.html">fe-siken.com 令和6年度 午前免除試験 問23</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q23.html">fe-siken.com 令和6年度 午前免除試験 問23</a>
         <p class="candidate-title">ネットワーク伝送時間の計算</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問23</p>
         
         
         <p class="score">照合スコア: 188</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q23.html">fe-siken.com 令和6年度 午前免除試験 問23</a><span>問23 解説へ 10Mビット／秒の回線を用いて100Mバイトのファイルを送信するとき，伝送におよそ何秒掛かるか。ここで，回線の伝送効率は75%とし，1Mビット＝10 6 ビットとす...</span></li><li><a href="https://www.fe-siken.com/kakomon/24_haru/q20.html">fe-siken.com 平成24年春期 問20</a><span>スプーリング</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q23.html">fe-siken.com 令和6年度 午前免除試験 問23</a><span>問23 解説へ 10Mビット／秒の回線を用いて100Mバイトのファイルを送信するとき，伝送におよそ何秒掛かるか。ここで，回線の伝送効率は75%とし，1Mビット＝10 6 ビットとす...</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/24_haru/q20.html">fe-siken.com 平成24年春期 問20</a><span>スプーリング</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問24<small>P.12</small></td>
@@ -417,14 +455,15 @@
       <td>TCP/IP階層モデルで見る装置A</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/28_aki/q31.html">fe-siken.com 平成28年秋期 問31</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/28_aki/q31.html">fe-siken.com 平成28年秋期 問31</a>
         <p class="candidate-title">ネットワーク機器</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H14春期 問65 基本情報技術者 H18春期 問57</p>
         
         <p class="score">照合スコア: 135</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/02_menjo/q33.html">fe-siken.com 令和2年度 午前免除試験 問33</a><span>MACフレームとIPパケット</span></li><li><a href="https://www.ap-siken.com/kakomon/31_haru/q33.html">ap-siken.com 平成31年春期 問33</a><span>MACフレームとIPパケット</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/02_menjo/q33.html">fe-siken.com 令和2年度 午前免除試験 問33</a><span>MACフレームとIPパケット</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/31_haru/q33.html">ap-siken.com 平成31年春期 問33</a><span>MACフレームとIPパケット</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問25<small>P.12</small></td>
@@ -432,14 +471,15 @@
       <td>IPアドレスとサブネット</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/21_aki/q39.html">fe-siken.com 平成21年秋期 問39</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/21_aki/q39.html">fe-siken.com 平成21年秋期 問39</a>
         <p class="candidate-title">サブネットマスク</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         
         
         <p class="score">照合スコア: 329</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/29_aki/q35.html">fe-siken.com 平成29年秋期 問35</a><span>ネットワークアドレス</span></li><li><a href="https://www.ap-siken.com/kakomon/31_haru/q34.html">ap-siken.com 平成31年春期 問34</a><span>ネットワークアドレス</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/29_aki/q35.html">fe-siken.com 平成29年秋期 問35</a><span>ネットワークアドレス</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/31_haru/q34.html">ap-siken.com 平成31年春期 問34</a><span>ネットワークアドレス</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問26<small>P.12</small></td>
@@ -447,14 +487,15 @@
       <td>Webサーバと外部プログラムの連携</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/30_haru/q35.html">fe-siken.com 平成30年春期 問35</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/30_haru/q35.html">fe-siken.com 平成30年春期 問35</a>
         <p class="candidate-title">Webサーバと外部プログラムを連携する仕組み</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H17秋期 問55 基本情報技術者 H22春期 問39</p>
         
         <p class="score">照合スコア: 161</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/22_haru/q39.html">fe-siken.com 平成22年春期 問39</a><span>Webサーバと外部プログラムを連携する仕組み</span></li><li><a href="https://www.fe-siken.com/kakomon/17_aki/q55.html">fe-siken.com 平成17年秋期 問55</a><span>Webサーバと外部プログラムを連携する仕組み</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_haru/q39.html">fe-siken.com 平成22年春期 問39</a><span>Webサーバと外部プログラムを連携する仕組み</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/17_aki/q55.html">fe-siken.com 平成17年秋期 問55</a><span>Webサーバと外部プログラムを連携する仕組み</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問27<small>P.13</small></td>
@@ -462,14 +503,15 @@
       <td>サイバーキルチェーン</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.ap-siken.com/kakomon/04_haru/q37.html">ap-siken.com 令和4年春期 問37</a>
+        <span class="source-badge ap">応用情報</span><a class="source-link" href="https://www.ap-siken.com/kakomon/04_haru/q37.html">ap-siken.com 令和4年春期 問37</a>
         <p class="candidate-title">サイバーキルチェーン</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge ap">応用情報</span></p>
         
         
         
         <p class="score">照合スコア: 177</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.sg-siken.com/kakomon/06_haru/a4.html">sg-siken.com 令和6年春期 問4</a><span>サイバーキルチェーン</span></li><li><a href="https://www.ap-siken.com/kakomon/07_aki/q36.html">ap-siken.com 令和7年秋期 問36</a><span>サイバーキルチェーン</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/06_haru/a4.html">sg-siken.com 令和6年春期 問4</a><span>サイバーキルチェーン</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/07_aki/q36.html">ap-siken.com 令和7年秋期 問36</a><span>サイバーキルチェーン</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問28<small>P.13</small></td>
@@ -477,14 +519,15 @@
       <td>エンベロープ暗号化</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q28.html">fe-siken.com 令和6年度 午前免除試験 問28</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q28.html">fe-siken.com 令和6年度 午前免除試験 問28</a>
         <p class="candidate-title">エンベロープ暗号化の説明はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問28</p>
         <p><strong>出題履歴:</strong> エンベデッド R3秋期 問18</p>
         
         <p class="score">照合スコア: 217</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q28.html">fe-siken.com 令和6年度 午前免除試験 問28</a><span>問28 解説へ エンベロープ暗号化の説明はどれか。 暗号化鍵で平文を暗号化してから，その暗号化鍵を別の暗号化鍵で暗号化する。 暗号化メールを送信する際に，送信者が電子メールの返信先...</span></li><li><a href="https://www.sg-siken.com/kakomon/01_yosou/q33.html">sg-siken.com 01_yosou 問33</a><span>公開鍵暗号方式の安全性</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q28.html">fe-siken.com 令和6年度 午前免除試験 問28</a><span>問28 解説へ エンベロープ暗号化の説明はどれか。 暗号化鍵で平文を暗号化してから，その暗号化鍵を別の暗号化鍵で暗号化する。 暗号化メールを送信する際に，送信者が電子メールの返信先...</span></li><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/01_yosou/q33.html">sg-siken.com 01_yosou 問33</a><span>公開鍵暗号方式の安全性</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問29<small>P.14</small></td>
@@ -492,14 +535,15 @@
       <td>リスクベース認証</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.ap-siken.com/kakomon/03_haru/q39.html">ap-siken.com 令和3年春期 問39</a>
+        <span class="source-badge ap">応用情報</span><a class="source-link" href="https://www.ap-siken.com/kakomon/03_haru/q39.html">ap-siken.com 令和3年春期 問39</a>
         <p class="candidate-title">リスクベース認証の特徴はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H28秋期 問40 応用情報技術者 H31春期 問37</p>
         
         <p class="score">照合スコア: 104</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/31_haru/q37.html">ap-siken.com 平成31年春期 問37</a><span>リスクベース認証の特徴はどれか</span></li><li><a href="https://www.ap-siken.com/kakomon/28_aki/q40.html">ap-siken.com 平成28年秋期 問40</a><span>リスクベース認証の特徴はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/31_haru/q37.html">ap-siken.com 平成31年春期 問37</a><span>リスクベース認証の特徴はどれか</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_aki/q40.html">ap-siken.com 平成28年秋期 問40</a><span>リスクベース認証の特徴はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問30<small>P.14</small></td>
@@ -507,14 +551,15 @@
       <td>JIS Q 27014のガバナンス範囲</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.sg-siken.com/kakomon/30_aki/q8.html">sg-siken.com 平成30年秋期 問8</a>
+        <span class="source-badge sg">セキュリティマネジメント</span><a class="source-link" href="https://www.sg-siken.com/kakomon/30_aki/q8.html">sg-siken.com 平成30年秋期 問8</a>
         <p class="candidate-title">情報セキュリティガバナンスの範囲</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge sg">セキュリティマネジメント</span></p>
         
         
         
         <p class="score">照合スコア: 327</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.sg-siken.com/kakomon/01_aki/q9.html">sg-siken.com 令和1年秋期 問9</a><span>JIS Q 27017に記載されている管理策</span></li><li><a href="https://www.fe-siken.com/kakomon/25_aki/q63.html">fe-siken.com 平成25年秋期 問63</a><span>業務モデルを定義する目的</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/01_aki/q9.html">sg-siken.com 令和1年秋期 問9</a><span>JIS Q 27017に記載されている管理策</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/25_aki/q63.html">fe-siken.com 平成25年秋期 問63</a><span>業務モデルを定義する目的</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問31<small>P.15</small></td>
@@ -522,14 +567,15 @@
       <td>IPSの説明</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/03_menjo/q42.html">fe-siken.com 令和3年度 午前免除試験 問42</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/03_menjo/q42.html">fe-siken.com 令和3年度 午前免除試験 問42</a>
         <p class="candidate-title">IPSの説明はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge sg">セキュリティマネジメント</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和3年7月 問42</p>
         <p><strong>出題履歴:</strong> 情報セキュマネ H31春期 問15</p>
         
         <p class="score">照合スコア: 167</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.sg-siken.com/kakomon/31_haru/q15.html">sg-siken.com 平成31年春期 問15</a><span>IPSの説明はどれか</span></li><li><a href="https://www.sg-siken.com/kakomon/29_aki/q13.html">sg-siken.com 平成29年秋期 問13</a><span>秘密情報の漏えいを防止するもの</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/31_haru/q15.html">sg-siken.com 平成31年春期 問15</a><span>IPSの説明はどれか</span></li><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/29_aki/q13.html">sg-siken.com 平成29年秋期 問13</a><span>秘密情報の漏えいを防止するもの</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問32<small>P.15</small></td>
@@ -537,14 +583,15 @@
       <td>ステガノグラフィ</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q32.html">fe-siken.com 令和6年度 午前免除試験 問32</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q32.html">fe-siken.com 令和6年度 午前免除試験 問32</a>
         <p class="candidate-title">ステガノグラフィはどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge sg">セキュリティマネジメント</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問32</p>
         <p><strong>出題履歴:</strong> 情報セキュマネ R1秋期 問11</p>
         <p><strong>確認メモ:</strong> 午前免除試験 令和6年7月 問32。出題履歴は情報セキュマネ R1秋 問11。</p>
         <p class="score">照合スコア: 84</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.sg-siken.com/kakomon/09_yosou/q16.html">sg-siken.com 09_yosou 問16</a><span>ステガノグラフィの機能はどれか</span></li><li><a href="https://www.ap-siken.com/kakomon/24_haru/q44.html">ap-siken.com 平成24年春期 問44</a><span>ステガノグラフィ</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/09_yosou/q16.html">sg-siken.com 09_yosou 問16</a><span>ステガノグラフィの機能はどれか</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/24_haru/q44.html">ap-siken.com 平成24年春期 問44</a><span>ステガノグラフィ</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問33<small>P.16</small></td>
@@ -552,14 +599,15 @@
       <td>WPA2-PSKの機能</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.ap-siken.com/kakomon/01_aki/q39.html">ap-siken.com 令和1年秋期 問39</a>
+        <span class="source-badge ap">応用情報</span><a class="source-link" href="https://www.ap-siken.com/kakomon/01_aki/q39.html">ap-siken.com 令和1年秋期 問39</a>
         <p class="candidate-title">WPA2-PSKの機能はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H27秋期 問39 応用情報技術者 H29春期 問42</p>
         
         <p class="score">照合スコア: 235</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/29_haru/q42.html">ap-siken.com 平成29年春期 問42</a><span>WPA2-PSKの機能はどれか</span></li><li><a href="https://www.ap-siken.com/kakomon/27_aki/q39.html">ap-siken.com 平成27年秋期 問39</a><span>WPA2-PSKの機能はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/29_haru/q42.html">ap-siken.com 平成29年春期 問42</a><span>WPA2-PSKの機能はどれか</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/27_aki/q39.html">ap-siken.com 平成27年秋期 問39</a><span>WPA2-PSKの機能はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問34<small>P.16</small></td>
@@ -567,14 +615,15 @@
       <td>UMLアクティビティ図</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/05_menjo/q34.html">fe-siken.com 令和5年度 午前免除試験 問34</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/05_menjo/q34.html">fe-siken.com 令和5年度 午前免除試験 問34</a>
         <p class="candidate-title">アクティビティ図の特徴はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和5年6月 問34</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 R2秋期 問46</p>
         <p><strong>確認メモ:</strong> 問題文と選択肢が一致。午前免除試験 令和5年6月 問34、出題履歴はAP R2秋 問46。</p>
         <p class="score">照合スコア: 手動確認</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/28_haru/q28.html">ap-siken.com 平成28年春期 問28</a><span>デッドロックが発生する資源の組合せ</span></li><li><a href="https://www.fe-siken.com/kakomon/01_aki/q51.html">fe-siken.com 令和1年秋期 問51</a><span>アクティビティの依存関係</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_haru/q28.html">ap-siken.com 平成28年春期 問28</a><span>デッドロックが発生する資源の組合せ</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/01_aki/q51.html">fe-siken.com 令和1年秋期 問51</a><span>アクティビティの依存関係</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問35<small>P.16</small></td>
@@ -582,14 +631,15 @@
       <td>クラスとインスタンス</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q47.html">fe-siken.com 平成30年秋期 問47</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q47.html">fe-siken.com 平成30年秋期 問47</a>
         <p class="candidate-title">クラスとインスタンスの関係</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H20春期 問43 基本情報技術者 H22秋期 問47</p>
         
         <p class="score">照合スコア: 258</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/22_aki/q47.html">fe-siken.com 平成22年秋期 問47</a><span>クラスとインスタンスの関係</span></li><li><a href="https://www.fe-siken.com/kakomon/20_haru/q43.html">fe-siken.com 平成20年春期 問43</a><span>クラスとインスタンスとの関係</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/22_aki/q47.html">fe-siken.com 平成22年秋期 問47</a><span>クラスとインスタンスの関係</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/20_haru/q43.html">fe-siken.com 平成20年春期 問43</a><span>クラスとインスタンスとの関係</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問36<small>P.17</small></td>
@@ -597,14 +647,15 @@
       <td>デザインレビューのねらい</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/20_haru/q46.html">fe-siken.com 平成20年春期 問46</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/20_haru/q46.html">fe-siken.com 平成20年春期 問46</a>
         <p class="candidate-title">デザインレビューを実施するねらい</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H15春期 問52</p>
         
         <p class="score">照合スコア: 115</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/15_haru/q52.html">fe-siken.com 平成15年春期 問52</a><span>デザインレビューを実施するねらい</span></li><li><a href="https://www.fe-siken.com/kakomon/23_toku/q47.html">fe-siken.com 平成23年特別試験 問47</a><span>ウォークスルー</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/15_haru/q52.html">fe-siken.com 平成15年春期 問52</a><span>デザインレビューを実施するねらい</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/23_toku/q47.html">fe-siken.com 平成23年特別試験 問47</a><span>ウォークスルー</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問37<small>P.17</small></td>
@@ -612,14 +663,15 @@
       <td>静的解析ツール</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/22_aki/q23.html">fe-siken.com 平成22年秋期 問23</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/22_aki/q23.html">fe-siken.com 平成22年秋期 問23</a>
         <p class="candidate-title">プログラムの静的解析ツール</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         
         
         <p class="score">照合スコア: 138</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/31_haru/q48.html">fe-siken.com 平成31年春期 問48</a><span>静的解析ツールのものはどれか</span></li><li><a href="https://www.fe-siken.com/s/kakomon/31_haru/q48.html">fe-siken.com 平成31年春期 問48</a><span>問48 解説へ ソフトウェアのテストツールの説明のうち，静的テストを支援する静的解析ツールのものはどれか。 指定された条件のテストデータや，プログラムの入力ファイルを自動的に生成す...</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/31_haru/q48.html">fe-siken.com 平成31年春期 問48</a><span>静的解析ツールのものはどれか</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/s/kakomon/31_haru/q48.html">fe-siken.com 平成31年春期 問48</a><span>問48 解説へ ソフトウェアのテストツールの説明のうち，静的テストを支援する静的解析ツールのものはどれか。 指定された条件のテストデータや，プログラムの入力ファイルを自動的に生成す...</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問38<small>P.18</small></td>
@@ -627,14 +679,15 @@
       <td>修正費用の期待値</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/31_haru/q49.html">fe-siken.com 平成31年春期 問49</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/31_haru/q49.html">fe-siken.com 平成31年春期 問49</a>
         <p class="candidate-title">修正費用の期待値</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H18秋期 問50</p>
         
         <p class="score">照合スコア: 168</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/s/kakomon/31_haru/q49.html">fe-siken.com 平成31年春期 問49</a><span>問49 解説へ 条件に従うとき，アプリケーションプログラムの初年度の修正費用の期待値は，何万円か。 〔条件〕 プログラム規模：2,000kステップ プログラムの潜在不良率：0.04...</span></li><li><a href="https://www.fe-siken.com/kakomon/18_aki/q50.html">fe-siken.com 平成18年秋期 問50</a><span>修正費用の期待値</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/s/kakomon/31_haru/q49.html">fe-siken.com 平成31年春期 問49</a><span>問49 解説へ 条件に従うとき，アプリケーションプログラムの初年度の修正費用の期待値は，何万円か。 〔条件〕 プログラム規模：2,000kステップ プログラムの潜在不良率：0.04...</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/18_aki/q50.html">fe-siken.com 平成18年秋期 問50</a><span>修正費用の期待値</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問39<small>P.18</small></td>
@@ -642,14 +695,15 @@
       <td>スクラムマスターの役割</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.ap-siken.com/kakomon/03_aki/q50.html">ap-siken.com 令和3年秋期 問50</a>
+        <span class="source-badge ap">応用情報</span><a class="source-link" href="https://www.ap-siken.com/kakomon/03_aki/q50.html">ap-siken.com 令和3年秋期 問50</a>
         <p class="candidate-title">スクラムマスタが行うこと</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge ap">応用情報</span></p>
         
         
         
         <p class="score">照合スコア: 183</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/03_haru/q49.html">ap-siken.com 令和3年春期 問49</a><span>プロダクトオーナーの役割はどれか</span></li><li><a href="https://www.fe-siken.com/kakomon/07_haru/a13.html">fe-siken.com 令和7年春期 問13</a><span>スクラムチームの役割</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/03_haru/q49.html">ap-siken.com 令和3年春期 問49</a><span>プロダクトオーナーの役割はどれか</span></li><li><span class="source-badge public">公開問題</span><a href="https://www.fe-siken.com/kakomon/07_haru/a13.html">fe-siken.com 令和7年春期 問13</a><span>スクラムチームの役割</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問40<small>P.19</small></td>
@@ -657,14 +711,15 @@
       <td>XPにおけるリファクタリング</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.ap-siken.com/kakomon/27_aki/q49.html">ap-siken.com 平成27年秋期 問49</a>
+        <span class="source-badge ap">応用情報</span><a class="source-link" href="https://www.ap-siken.com/kakomon/27_aki/q49.html">ap-siken.com 平成27年秋期 問49</a>
         <p class="candidate-title">リファクタリングの説明はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H26春期 問49</p>
         
         <p class="score">照合スコア: 177</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/26_haru/q49.html">ap-siken.com 平成26年春期 問49</a><span>リファクタリングの説明はどれか</span></li><li><a href="https://www.fe-siken.com/kakomon/06_menjo/q40.html">fe-siken.com 令和6年度 午前免除試験 問40</a><span>リファクタリングの説明はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/26_haru/q49.html">ap-siken.com 平成26年春期 問49</a><span>リファクタリングの説明はどれか</span></li><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/06_menjo/q40.html">fe-siken.com 令和6年度 午前免除試験 問40</a><span>リファクタリングの説明はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問41<small>P.19</small></td>
@@ -672,14 +727,15 @@
       <td>工程別工数比率と開発期間</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/02_menjo/q54.html">fe-siken.com 令和2年度 午前免除試験 問54</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/02_menjo/q54.html">fe-siken.com 令和2年度 午前免除試験 問54</a>
         <p class="candidate-title">スケジュール管理</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和2年1月 問54</p>
         <p><strong>出題履歴:</strong> プロジェクトマネージャ H31春期 問8</p>
         
         <p class="score">照合スコア: 205</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/04_aki/q53.html">ap-siken.com 令和4年秋期 問53</a><span>スケジュール管理</span></li><li><a href="https://www.ap-siken.com/kakomon/27_haru/q53.html">ap-siken.com 平成27年春期 問53</a><span>スケジュール管理</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/04_aki/q53.html">ap-siken.com 令和4年秋期 問53</a><span>スケジュール管理</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/27_haru/q53.html">ap-siken.com 平成27年春期 問53</a><span>スケジュール管理</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問42<small>P.19</small></td>
@@ -687,14 +743,15 @@
       <td>EVMの管理対象</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/03_menjo/q51.html">fe-siken.com 令和3年度 午前免除試験 問51</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/03_menjo/q51.html">fe-siken.com 令和3年度 午前免除試験 問51</a>
         <p class="candidate-title">EVMの管理対象の組みはどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和3年1月 問51</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 R2秋期 問52</p>
         
         <p class="score">照合スコア: 313</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/02_aki/q52.html">ap-siken.com 令和2年秋期 問52</a><span>EVMの管理対象の組みはどれか</span></li><li><a href="https://www.ap-siken.com/kakomon/29_aki/q52.html">ap-siken.com 平成29年秋期 問52</a><span>EVMの管理対象の組みはどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/02_aki/q52.html">ap-siken.com 令和2年秋期 問52</a><span>EVMの管理対象の組みはどれか</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/29_aki/q52.html">ap-siken.com 平成29年秋期 問52</a><span>EVMの管理対象の組みはどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問43<small>P.20</small></td>
@@ -702,14 +759,15 @@
       <td>コールドスタート</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q43.html">fe-siken.com 令和6年度 午前免除試験 問43</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q43.html">fe-siken.com 令和6年度 午前免除試験 問43</a>
         <p class="candidate-title">初期プログラムロードとも呼ばれるもの</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge fe">基本情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問43</p>
         <p><strong>出題履歴:</strong> 基本情報技術者 H30秋期 問56</p>
         
         <p class="score">照合スコア: 215</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/30_aki/q56.html">fe-siken.com 平成30年秋期 問56</a><span>初期プログラムロードとも呼ばれるもの</span></li><li><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q43.html">fe-siken.com 令和6年度 午前免除試験 問43</a><span>問43 解説へ システム障害が発生したときにシステムを初期状態に戻して再開する方法であり，更新前コピー又は更新後コピーの前処理を伴わないシステム開始のことであって，初期プログラムロ...</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/30_aki/q56.html">fe-siken.com 平成30年秋期 問56</a><span>初期プログラムロードとも呼ばれるもの</span></li><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/s/kakomon/06_menjo/q43.html">fe-siken.com 令和6年度 午前免除試験 問43</a><span>問43 解説へ システム障害が発生したときにシステムを初期状態に戻して再開する方法であり，更新前コピー又は更新後コピーの前処理を伴わないシステム開始のことであって，初期プログラムロ...</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問44<small>P.20</small></td>
@@ -717,14 +775,15 @@
       <td>落雷過電圧への対策</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/29_aki/q57.html">fe-siken.com 平成29年秋期 問57</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/29_aki/q57.html">fe-siken.com 平成29年秋期 問57</a>
         <p class="candidate-title">過電圧の被害から防ぐための手段</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H21秋期 問57 基本情報技術者 H25春期 問56 基本情報技術者 H28春期 問58</p>
         
         <p class="score">照合スコア: 138</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/28_haru/q58.html">fe-siken.com 平成28年春期 問58</a><span>過電圧の被害から防ぐための手段</span></li><li><a href="https://www.fe-siken.com/kakomon/25_haru/q56.html">fe-siken.com 平成25年春期 問56</a><span>過電圧の被害から防ぐための手段</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/28_haru/q58.html">fe-siken.com 平成28年春期 問58</a><span>過電圧の被害から防ぐための手段</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/25_haru/q56.html">fe-siken.com 平成25年春期 問56</a><span>過電圧の被害から防ぐための手段</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問45<small>P.20</small></td>
@@ -732,14 +791,15 @@
       <td>情報セキュリティ監査基準</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.sg-siken.com/kakomon/28_aki/q40.html">sg-siken.com 平成28年秋期 問40</a>
+        <span class="source-badge sg">セキュリティマネジメント</span><a class="source-link" href="https://www.sg-siken.com/kakomon/28_aki/q40.html">sg-siken.com 平成28年秋期 問40</a>
         <p class="candidate-title">情報セキュリティ監査基準</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge sg">セキュリティマネジメント</span></p>
         
         
         
         <p class="score">照合スコア: 286</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/25_haru/q58.html">ap-siken.com 平成25年春期 問58</a><span>情報セキュリティと守秘責任</span></li><li><a href="https://www.ap-siken.com/kakomon/23_toku/q59.html">ap-siken.com 平成23年特別試験 問59</a><span>情報セキュリティと守秘責任</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/25_haru/q58.html">ap-siken.com 平成25年春期 問58</a><span>情報セキュリティと守秘責任</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/23_toku/q59.html">ap-siken.com 平成23年特別試験 問59</a><span>情報セキュリティと守秘責任</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問46<small>P.21</small></td>
@@ -747,14 +807,15 @@
       <td>EAのTo-Beモデル</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q61.html">fe-siken.com 令和4年度 午前免除試験 問61</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q61.html">fe-siken.com 令和4年度 午前免除試験 問61</a>
         <p class="candidate-title">To-Beモデル</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和4年6月 問61</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 H29秋期 問61</p>
         
         <p class="score">照合スコア: 203</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/29_aki/q61.html">ap-siken.com 平成29年秋期 問61</a><span>To-Beモデル</span></li><li><a href="https://www.ap-siken.com/kakomon/27_aki/q61.html">ap-siken.com 平成27年秋期 問61</a><span>To-Beモデル</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/29_aki/q61.html">ap-siken.com 平成29年秋期 問61</a><span>To-Beモデル</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/27_aki/q61.html">ap-siken.com 平成27年秋期 問61</a><span>To-Beモデル</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問47<small>P.21</small></td>
@@ -762,14 +823,15 @@
       <td>スマートグリッド</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/26_aki/q63.html">fe-siken.com 平成26年秋期 問63</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/26_aki/q63.html">fe-siken.com 平成26年秋期 問63</a>
         <p class="candidate-title">スマートグリッドの説明はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H25春期 問63</p>
         
         <p class="score">照合スコア: 146</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/25_haru/q63.html">ap-siken.com 平成25年春期 問63</a><span>スマートグリッドの説明はどれか</span></li><li><a href="https://www.fe-siken.com/kakomon/27_aki/q74.html">fe-siken.com 平成27年秋期 問74</a><span>スマートメーターを導入する目的</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/25_haru/q63.html">ap-siken.com 平成25年春期 問63</a><span>スマートグリッドの説明はどれか</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/27_aki/q74.html">fe-siken.com 平成27年秋期 問74</a><span>スマートメーターを導入する目的</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問48<small>P.22</small></td>
@@ -777,14 +839,15 @@
       <td>要件定義で実施すべきこと</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q65.html">fe-siken.com 平成30年秋期 問65</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q65.html">fe-siken.com 平成30年秋期 問65</a>
         <p class="candidate-title">要件定義プロセスで実施すべきもの</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H29春期 問66</p>
         
         <p class="score">照合スコア: 187</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/29_haru/q66.html">fe-siken.com 平成29年春期 問66</a><span>要件定義プロセスで実施すべきもの</span></li><li><a href="https://www.sg-siken.com/kakomon/30_aki/q49.html">sg-siken.com 平成30年秋期 問49</a><span>要件定義プロセスで実施すべきもの</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/29_haru/q66.html">fe-siken.com 平成29年春期 問66</a><span>要件定義プロセスで実施すべきもの</span></li><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/30_aki/q49.html">sg-siken.com 平成30年秋期 問49</a><span>要件定義プロセスで実施すべきもの</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問49<small>P.22</small></td>
@@ -792,14 +855,15 @@
       <td>M&amp;A</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q66.html">fe-siken.com 令和4年度 午前免除試験 問66</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q66.html">fe-siken.com 令和4年度 午前免除試験 問66</a>
         <p class="candidate-title">M&amp;Aを説明したものはどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和4年12月 問66</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 H23秋期 問66</p>
         
         <p class="score">照合スコア: 180</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/23_aki/q66.html">ap-siken.com 平成23年秋期 問66</a><span>M&amp;Aを説明したものはどれか</span></li><li><a href="https://www.fe-siken.com/kakomon/03_menjo/q66.html">fe-siken.com 令和3年度 午前免除試験 問66</a><span>垂直統合に該当するものはどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/23_aki/q66.html">ap-siken.com 平成23年秋期 問66</a><span>M&amp;Aを説明したものはどれか</span></li><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/03_menjo/q66.html">fe-siken.com 令和3年度 午前免除試験 問66</a><span>垂直統合に該当するものはどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問50<small>P.23</small></td>
@@ -807,14 +871,15 @@
       <td>プロダクトライフサイクルの成長期</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/26_aki/q70.html">fe-siken.com 平成26年秋期 問70</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/26_aki/q70.html">fe-siken.com 平成26年秋期 問70</a>
         <p class="candidate-title">プロダクトライフサイクル</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 初級シスアド H21春期 問62 基本情報技術者 H26春期 問68</p>
         
         <p class="score">照合スコア: 196</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/26_haru/q68.html">fe-siken.com 平成26年春期 問68</a><span>プロダクトライフサイクル</span></li><li><a href="https://www.fe-siken.com/kakomon/30_aki/q67.html">fe-siken.com 平成30年秋期 問67</a><span>プロダクトライフサイクル</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/26_haru/q68.html">fe-siken.com 平成26年春期 問68</a><span>プロダクトライフサイクル</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/30_aki/q67.html">fe-siken.com 平成30年秋期 問67</a><span>プロダクトライフサイクル</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問51<small>P.23</small></td>
@@ -822,14 +887,15 @@
       <td>BSCの顧客の視点</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/24_haru/q69.html">fe-siken.com 平成24年春期 問69</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/24_haru/q69.html">fe-siken.com 平成24年春期 問69</a>
         <p class="candidate-title">バランススコアカード 顧客の視点</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         
         
         <p class="score">照合スコア: 204</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/01_aki/q67.html">fe-siken.com 令和1年秋期 問67</a><span>BSCの内部ビジネスプロセス</span></li><li><a href="https://www.fe-siken.com/kakomon/29_haru/q70.html">fe-siken.com 平成29年春期 問70</a><span>BSCの学習と成長の視点</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/01_aki/q67.html">fe-siken.com 令和1年秋期 問67</a><span>BSCの内部ビジネスプロセス</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/29_haru/q70.html">fe-siken.com 平成29年春期 問70</a><span>BSCの学習と成長の視点</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問52<small>P.23</small></td>
@@ -837,14 +903,15 @@
       <td>技術進化過程を表す曲線</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q70.html">fe-siken.com 平成30年秋期 問70</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q70.html">fe-siken.com 平成30年秋期 問70</a>
         <p class="candidate-title">技術のSカーブ</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H23特別 問69 応用情報技術者 H24秋期 問70 応用情報技術者 H28春期 問70</p>
         
         <p class="score">照合スコア: 229</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/28_haru/q70.html">ap-siken.com 平成28年春期 問70</a><span>技術のSカーブ</span></li><li><a href="https://www.ap-siken.com/kakomon/24_aki/q70.html">ap-siken.com 平成24年秋期 問70</a><span>技術のSカーブ</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_haru/q70.html">ap-siken.com 平成28年春期 問70</a><span>技術のSカーブ</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/24_aki/q70.html">ap-siken.com 平成24年秋期 問70</a><span>技術のSカーブ</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問53<small>P.24</small></td>
@@ -852,14 +919,15 @@
       <td>HEMS</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q74.html">fe-siken.com 令和4年度 午前免除試験 問74</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q74.html">fe-siken.com 令和4年度 午前免除試験 問74</a>
         <p class="candidate-title">HEMSの説明として適切なもの</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge fe">基本情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和4年7月 問74</p>
         <p><strong>出題履歴:</strong> 基本情報技術者 H29秋期 問73</p>
         
         <p class="score">照合スコア: 285</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/29_aki/q73.html">fe-siken.com 平成29年秋期 問73</a><span>HEMSの説明として適切なもの</span></li><li><a href="https://www.fe-siken.com/kakomon/sample/a54.html">fe-siken.com 科目Aサンプル問題 問54</a><span>HEMSの説明はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/29_aki/q73.html">fe-siken.com 平成29年秋期 問73</a><span>HEMSの説明として適切なもの</span></li><li><span class="source-badge sample">サンプル問題</span><a href="https://www.fe-siken.com/kakomon/sample/a54.html">fe-siken.com 科目Aサンプル問題 問54</a><span>HEMSの説明はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問54<small>P.25</small></td>
@@ -867,14 +935,15 @@
       <td>製品開発スピードアップ手法の分類</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q72.html">fe-siken.com 令和4年度 午前免除試験 問72</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/04_menjo/q72.html">fe-siken.com 令和4年度 午前免除試験 問72</a>
         <p class="candidate-title">製品開発のスピードアップ手法</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和4年1月 問72</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 H28春期 問71</p>
         
         <p class="score">照合スコア: 154</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/28_haru/q71.html">ap-siken.com 平成28年春期 問71</a><span>製品開発のスピードアップ手法</span></li><li><a href="https://www.fe-siken.com/kakomon/06_menjo/q54.html">fe-siken.com 令和6年度 午前免除試験 問54</a><span>MRPの特徴はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_haru/q71.html">ap-siken.com 平成28年春期 問71</a><span>製品開発のスピードアップ手法</span></li><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/06_menjo/q54.html">fe-siken.com 令和6年度 午前免除試験 問54</a><span>MRPの特徴はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問55<small>P.26</small></td>
@@ -882,14 +951,15 @@
       <td>クラウドソーシング</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q55.html">fe-siken.com 令和6年度 午前免除試験 問55</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/06_menjo/q55.html">fe-siken.com 令和6年度 午前免除試験 問55</a>
         <p class="candidate-title">クラウドソーシングの説明はどれか</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge ap">応用情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和6年7月 問55</p>
         <p><strong>出題履歴:</strong> 応用情報技術者 H28秋期 問72</p>
         
         <p class="score">照合スコア: 190</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/02_menjo/q73.html">fe-siken.com 令和2年度 午前免除試験 問73</a><span>クラウドソーシングの説明はどれか</span></li><li><a href="https://www.ap-siken.com/kakomon/28_aki/q72.html">ap-siken.com 平成28年秋期 問72</a><span>クラウドソーシングの説明はどれか</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge menjo">修了試験</span><a href="https://www.fe-siken.com/kakomon/02_menjo/q73.html">fe-siken.com 令和2年度 午前免除試験 問73</a><span>クラウドソーシングの説明はどれか</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/28_aki/q72.html">ap-siken.com 平成28年秋期 問72</a><span>クラウドソーシングの説明はどれか</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問56<small>P.26</small></td>
@@ -897,14 +967,15 @@
       <td>マトリックス組織</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/03_menjo/q74.html">fe-siken.com 令和3年度 午前免除試験 問74</a>
+        <span class="source-badge menjo">修了試験</span><a class="source-link" href="https://www.fe-siken.com/kakomon/03_menjo/q74.html">fe-siken.com 令和3年度 午前免除試験 問74</a>
         <p class="candidate-title">マトリックス組織を説明したもの</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge menjo">修了試験</span><span class="source-badge fe">基本情報</span></p>
         <p><strong>出典欄:</strong> 午前免除試験 令和3年7月 問75</p>
         <p><strong>出題履歴:</strong> 基本情報技術者 H28秋期 問76</p>
         
         <p class="score">照合スコア: 104</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/28_aki/q76.html">fe-siken.com 平成28年秋期 問76</a><span>マトリックス組織を説明したもの</span></li><li><a href="https://www.fe-siken.com/kakomon/18_aki/q71.html">fe-siken.com 平成18年秋期 問71</a><span>プロジェクト組織</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/28_aki/q76.html">fe-siken.com 平成28年秋期 問76</a><span>マトリックス組織を説明したもの</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/18_aki/q71.html">fe-siken.com 平成18年秋期 問71</a><span>プロジェクト組織</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問57<small>P.27</small></td>
@@ -912,14 +983,15 @@
       <td>定量発注方式の発注量変更</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/28_aki/q78.html">fe-siken.com 平成28年秋期 問78</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/28_aki/q78.html">fe-siken.com 平成28年秋期 問78</a>
         <p class="candidate-title">定量発注方式</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 応用情報技術者 H26秋期 問76</p>
         <p><strong>確認メモ:</strong> 問題文、図の条件、選択肢が一致。出題履歴はAP H26秋 問76。</p>
         <p class="score">照合スコア: 27</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/29_haru/q75.html">ap-siken.com 平成29年春期 問75</a><span>定量発注方式の特徴はどれか</span></li><li><a href="https://www.ap-siken.com/kakomon/26_aki/q76.html">ap-siken.com 平成26年秋期 問76</a><span>定量発注方式</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/29_haru/q75.html">ap-siken.com 平成29年春期 問75</a><span>定量発注方式の特徴はどれか</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/26_aki/q76.html">ap-siken.com 平成26年秋期 問76</a><span>定量発注方式</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問58<small>P.28</small></td>
@@ -927,14 +999,15 @@
       <td>ヒストグラム</td>
       <td><span class="confidence mid">類題</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/22_aki/q76.html">fe-siken.com 平成22年秋期 問76</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/22_aki/q76.html">fe-siken.com 平成22年秋期 問76</a>
         <p class="candidate-title">QC七つ道具</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 初級シスアド H17秋期 問69</p>
         <p><strong>確認メモ:</strong> 選択肢構成が同じQC七つ道具問題。今回問は表現差があるため完全一致ではなく類題扱い。出題履歴は初級シスアド H17秋 問69。</p>
         <p class="score">照合スコア: 100</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.ap-siken.com/kakomon/03_moshi/q75.html">ap-siken.com 03_moshi 問75</a><span>パレート図</span></li><li><a href="https://www.sg-siken.com/kakomon/05_haru/a12.html">sg-siken.com 令和5年春期 問12</a><span>魚の骨のような図にまとめたもの</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/03_moshi/q75.html">ap-siken.com 03_moshi 問75</a><span>パレート図</span></li><li><span class="source-badge sg">セキュリティマネジメント</span><a href="https://www.sg-siken.com/kakomon/05_haru/a12.html">sg-siken.com 令和5年春期 問12</a><span>魚の骨のような図にまとめたもの</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問59<small>P.28</small></td>
@@ -942,14 +1015,15 @@
       <td>期待利益の計算</td>
       <td><span class="confidence high">確定</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q68.html">fe-siken.com 平成30年秋期 問68</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/30_aki/q68.html">fe-siken.com 平成30年秋期 問68</a>
         <p class="candidate-title">価格と需要の関係</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span></p>
         
         <p><strong>出題履歴:</strong> 基本情報技術者 H15秋期 問74 基本情報技術者 H21秋期 問69 基本情報技術者 H23特別 問67 基本情報技術者 H26春期 問69</p>
         <p><strong>確認メモ:</strong> 価格と需要の関係、期待利益計算が一致。出題履歴にFE H15秋 問74、H21秋 問69、H23特別 問67、H26春 問69。</p>
         <p class="score">照合スコア: 49</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/26_haru/q69.html">fe-siken.com 平成26年春期 問69</a><span>価格と需要の関係</span></li><li><a href="https://www.fe-siken.com/kakomon/23_toku/q67.html">fe-siken.com 平成23年特別試験 問67</a><span>価格と需要の関係</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/26_haru/q69.html">fe-siken.com 平成26年春期 問69</a><span>価格と需要の関係</span></li><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/23_toku/q67.html">fe-siken.com 平成23年特別試験 問67</a><span>価格と需要の関係</span></li></ol></td>
     </tr>
 <tr>
       <td class="qcell">問60<small>P.28</small></td>
@@ -957,14 +1031,15 @@
       <td>労働者派遣契約の当事者</td>
       <td><span class="confidence high">高</span></td>
       <td>
-        <a class="source-link" href="https://www.fe-siken.com/kakomon/22_haru/q79.html">fe-siken.com 平成22年春期 問79</a>
+        <span class="source-badge fe">基本情報</span><a class="source-link" href="https://www.fe-siken.com/kakomon/22_haru/q79.html">fe-siken.com 平成22年春期 問79</a>
         <p class="candidate-title">労働者派遣法</p>
+        <p class="source-badges"><strong>種別:</strong> <span class="source-badge fe">基本情報</span><span class="source-badge ap">応用情報</span></p>
         
         <p><strong>出題履歴:</strong> 初級シスアド H19秋期 問79 応用情報技術者 H26春期 問79 基本情報技術者 H19秋期 問80</p>
         
         <p class="score">照合スコア: 228</p>
       </td>
-      <td><ol class="alt-list"><li><a href="https://www.fe-siken.com/kakomon/19_aki/q80.html">fe-siken.com 平成19年秋期 問80</a><span>労働者派遣法</span></li><li><a href="https://www.ap-siken.com/kakomon/26_haru/q79.html">ap-siken.com 平成26年春期 問79</a><span>労働者派遣法</span></li></ol></td>
+      <td><ol class="alt-list"><li><span class="source-badge fe">基本情報</span><a href="https://www.fe-siken.com/kakomon/19_aki/q80.html">fe-siken.com 平成19年秋期 問80</a><span>労働者派遣法</span></li><li><span class="source-badge ap">応用情報</span><a href="https://www.ap-siken.com/kakomon/26_haru/q79.html">ap-siken.com 平成26年春期 問79</a><span>労働者派遣法</span></li></ol></td>
     </tr>
         </tbody>
       </table>
