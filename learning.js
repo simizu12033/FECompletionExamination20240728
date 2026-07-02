@@ -72,11 +72,7 @@ const retryAnswerCount=()=>QUESTIONS.filter(q=>wasWrong(q)&&learningState.retryA
 const retryCheckedCorrectCount=()=>QUESTIONS.filter(q=>wasWrong(q)&&retryCheckedCorrect(q)).length;
 
 function visible(q){
-  if(!isReview())return true;
-  const text=`${q.n} ${q.title} ${q.field} ${q.answerText} ${q.summary} ${q.reasoning.join(" ")}`.toLowerCase();
-  return (learningState.filter==="すべて"||q.field===learningState.filter)&&
-    (!learningState.query||text.includes(learningState.query.toLowerCase()))&&
-    (!learningState.onlyUnlearned||!learningState.understood.has(q.n));
+  return true;
 }
 
 function renderLearning(){
@@ -180,7 +176,7 @@ function updatePhasePanel(){
   const retryAnswers=retryAnswerCount();
   const retryCorrect=retryCheckedCorrectCount();
   const totalCorrect=firstScore()+retryCorrect;
-  qs("#reviewToolbar").hidden=!isReview();
+  qs("#reviewToolbar").hidden=true;
   document.querySelectorAll("[data-exam-controls]").forEach(el=>el.hidden=isReview());
   qs("#listTitle").textContent=isReview()?"採点結果と解説":"試験問題";
   qs("#phaseMessage").textContent=isReview()
@@ -324,6 +320,9 @@ function initLearning(){
     learningState.phase="review";
     learningState.retryAnswers={};
     learningState.retryChecked={};
+    learningState.filter="すべて";
+    learningState.query="";
+    learningState.onlyUnlearned=false;
     saveLearning();
     ensureFirstReport();
     qs("#confirmDialog").close();

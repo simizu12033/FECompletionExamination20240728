@@ -22,11 +22,7 @@ function termAnswered(term){
   return !!termStatus(term);
 }
 function filteredTerms(){
-  const q=termState.query.trim().toLowerCase();
-  return TERMS.filter(t=>
-    (termState.filter==="すべて"||t.field===termState.filter)&&
-    (!q||`${t.term} ${t.field} ${t.prompt} ${t.meaning} ${t.cue} ${t.trap} ${t.tags.join(" ")}`.toLowerCase().includes(q))
-  ).sort((a,b)=>{
+  return TERMS.slice().sort((a,b)=>{
     const as=termStatus(a),bs=termStatus(b);
     if(as!==bs)return (termStatusRank[as]??-1)-(termStatusRank[bs]??-1);
     return a.q-b.q;
@@ -49,10 +45,6 @@ function setActiveTerm(index){
 function jumpToTerm(termId){
   const target=TERMS.find(t=>t.id===termId);
   if(!target)return;
-  termState.filter=target.field;
-  termState.query="";
-  const search=document.querySelector("#termSearch");
-  if(search)search.value="";
   const index=filteredTerms().findIndex(t=>t.id===termId);
   setActiveTerm(index<0?0:index);
 }
@@ -83,7 +75,8 @@ function renderTerms(){
     ["あやしい",shaky],
     ["覚えていない",weak]
   ].map(([label,value])=>`<div><strong>${value}</strong><span>${label}</span></div>`).join("");
-  document.querySelector("#termFilters").innerHTML=termFields.map(f=>`<button type="button" class="${f===termState.filter?"active":""}" data-term-field="${termEsc(f)}">${termEsc(f)}</button>`).join("");
+  const filters=document.querySelector("#termFilters");
+  if(filters)filters.innerHTML="";
   const card=document.querySelector("#termCard");
   if(!active){
     card.innerHTML=`<p class="term-empty">条件に一致する用語がありません。</p>`;
@@ -132,18 +125,6 @@ function renderTerms(){
 function initTerms(){
   const section=document.querySelector("#termLearning");
   if(!section)return;
-  document.querySelector("#termSearch").oninput=e=>{
-    termState.query=e.target.value;
-    termState.active=0;
-    renderTerms();
-  };
-  document.querySelector("#termFilters").onclick=e=>{
-    const button=e.target.closest("[data-term-field]");
-    if(!button)return;
-    termState.filter=button.dataset.termField;
-    termState.active=0;
-    renderTerms();
-  };
   document.querySelector("#termCard").onclick=e=>{
     if(e.target.closest("[data-term-status]")){
       markTerm(e.target.closest("[data-term-status]").dataset.termStatus);
