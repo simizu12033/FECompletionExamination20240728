@@ -138,7 +138,7 @@ function renderLearning(){
           line.className="result-line wrong";
           line.textContent=learningState.retryAnswers[q.n]
             ?`初回は不正解でした。再回答を記録しました。正誤はまだ表示していません。「再回答を採点する」を押してください。`
-            :`初回は不正解でした。正答と解説は隠しています。もう一度選択肢を選んでください。`;
+            :`初回は不正解でした。正答は隠しています。必要なら「解説表示」を押して確認し、もう一度選択肢を選んでください。`;
         }
       }else{
         line.className="result-line correct";

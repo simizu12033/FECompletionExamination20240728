@@ -111,7 +111,8 @@ function renderTerms(){
       ${status?`<p class="term-current">現在：${termStatusLabel[status]}</p>`:""}
     `;
   }
-  document.querySelector("#termList").innerHTML=list.map((t,i)=>{
+  const termList=document.querySelector("#termList");
+  if(termList)termList.innerHTML=list.map((t,i)=>{
     const status=termStatus(t);
     return `<button type="button" class="${i===termState.active?"active":""} ${termStatusClass[status]||""}" data-term-index="${i}">
       <b>${termEsc(t.term)}</b><span>問${t.q}</span>
@@ -135,7 +136,8 @@ function initTerms(){
       renderTerms();
     }
   };
-  document.querySelector("#termList").onclick=e=>{
+  const termList=document.querySelector("#termList");
+  if(termList)termList.onclick=e=>{
     const button=e.target.closest("[data-term-index]");
     if(button)setActiveTerm(Number(button.dataset.termIndex));
   };
