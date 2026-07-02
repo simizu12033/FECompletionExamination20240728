@@ -1,5 +1,5 @@
 const qs=s=>document.querySelector(s);
-const STORAGE_PREFIX="tokurei-fe-20240728";
+const STORAGE_PREFIX="tokurei-fe-20260614";
 const STORAGE={
   phase:`${STORAGE_PREFIX}-phase`,
   answers:`${STORAGE_PREFIX}-answers`,
@@ -35,20 +35,19 @@ if(learningState.phase==="retry"||learningState.phase==="retryReview")learningSt
 
 const reviewFields=["すべて",...new Set(QUESTIONS.map(q=>q.field))];
 const IMPORTANT_WORDS=[
-  ["基礎理論","情報落ち","正規分布","二分探索","偶数パリティ"],
-  ["AI","ディープラーニング","ニューラルネットワーク"],
-  ["コンピュータ","MIPS","キャッシュミス","ビデオメモリ","仮想記憶","ページ"],
-  ["アルゴリズム","スタック","二分探索"],
-  ["プログラミング","値呼出し","参照呼出し","リファクタリング","クラスとインスタンス"],
-  ["システム","フォールトトレラント","スループット","コールドスタート","SPD"],
-  ["データベース","正規化","NOT EXISTS","JDBC","共有ロック","排他ロック"],
-  ["ネットワーク","ルータ","サブネット","CGI","WPA2-PSK"],
-  ["セキュリティ","サイバーキルチェーン","エンベロープ暗号化","リスクベース認証","IPS","ステガノグラフィ"],
-  ["開発技術","アクティビティ図","デザインレビュー","静的解析","要件定義"],
-  ["マネジメント","スクラムマスター","EVM","工程別工数","修正費用期待値"],
-  ["監査","情報セキュリティ監査基準","独立性","判断尺度"],
-  ["ストラテジ","EA","スマートグリッド","M&A","プロダクトライフサイクル","BSC","Sカーブ","HEMS","クラウドソーシング","マトリックス組織"],
-  ["品質管理","ヒストグラム"],["会計","期待利益"],["法務","OSS","労働者派遣契約"]
+  ["基礎理論","情報落ち","マルコフ過程"],["AI","ファインチューニング"],
+  ["コンピュータ","A/D変換","MIPS","オーバーフロー","ストライピング","仮想記憶","アクティブLow"],
+  ["アルゴリズム","二分探索木","深さ優先探索"],["プログラミング","オーバーロード","継承"],
+  ["システム","フェールセーフ","ボトルネック"],
+  ["データベース","グラフ型DB","正規化","UNION","ストアドプロシージャ","チェックポイント"],
+  ["ネットワーク","OSI参照モデル","5タプル","SNMP","Wi-Fi Direct"],
+  ["セキュリティ","ルートキット","暗号の危殆化","FAR・FRR","ファジング","EDR","ゼロトラスト","XSS"],
+  ["開発技術","DFD","マイクロサービス","同値分割","TDD"],
+  ["マネジメント","プロダクトバックログ","ベースライン","クリティカルパス"],
+  ["サービス管理","インシデント管理","可用性","内部監査"],
+  ["ストラテジ","BSC","PPM","カニバリゼーション","ビジネスモデルキャンバス","RPA","移動平均"],
+  ["IoT","エネルギーハーベスティング"],["品質管理","パレート図"],
+  ["会計","特別損失"],["法務","GPL","個人情報の利用目的"]
 ];
 
 const saveLearning=()=>{
@@ -72,7 +71,11 @@ const retryAnswerCount=()=>QUESTIONS.filter(q=>wasWrong(q)&&learningState.retryA
 const retryCheckedCorrectCount=()=>QUESTIONS.filter(q=>wasWrong(q)&&retryCheckedCorrect(q)).length;
 
 function visible(q){
-  return true;
+  if(!isReview())return true;
+  const text=`${q.n} ${q.title} ${q.field} ${q.answerText} ${q.summary} ${q.reasoning.join(" ")}`.toLowerCase();
+  return (learningState.filter==="すべて"||q.field===learningState.filter)&&
+    (!learningState.query||text.includes(learningState.query.toLowerCase()))&&
+    (!learningState.onlyUnlearned||!learningState.understood.has(q.n));
 }
 
 function renderLearning(){
@@ -138,7 +141,7 @@ function renderLearning(){
           line.className="result-line wrong";
           line.textContent=learningState.retryAnswers[q.n]
             ?`初回は不正解でした。再回答を記録しました。正誤はまだ表示していません。「再回答を採点する」を押してください。`
-            :`初回は不正解でした。正答は隠しています。必要なら「解説表示」を押して確認し、もう一度選択肢を選んでください。`;
+            :`初回は不正解でした。正答と解説は隠しています。もう一度選択肢を選んでください。`;
         }
       }else{
         line.className="result-line correct";
@@ -176,7 +179,7 @@ function updatePhasePanel(){
   const retryAnswers=retryAnswerCount();
   const retryCorrect=retryCheckedCorrectCount();
   const totalCorrect=firstScore()+retryCorrect;
-  qs("#reviewToolbar").hidden=true;
+  qs("#reviewToolbar").hidden=!isReview();
   document.querySelectorAll("[data-exam-controls]").forEach(el=>el.hidden=isReview());
   qs("#listTitle").textContent=isReview()?"採点結果と解説":"試験問題";
   qs("#phaseMessage").textContent=isReview()
@@ -309,7 +312,8 @@ function initLearning(){
     document.querySelectorAll("#filters button").forEach(b=>b.classList.toggle("active",b===e.target));
     renderLearning();
   };
-  qs("#searchInput").oninput=e=>{learningState.query=e.target.value.replace(/^問/,"");renderLearning()};
+  const searchInput=qs("#searchInput");
+  if(searchInput)searchInput.oninput=e=>{learningState.query=e.target.value.replace(/^問/,"");renderLearning()};
   qs("#onlyUnlearned").onchange=e=>{learningState.onlyUnlearned=e.target.checked;renderLearning()};
   document.querySelectorAll('[data-action="retry-grade"]').forEach(button=>button.onclick=gradeRetryAnswers);
   document.querySelectorAll('[data-action="unanswered"]').forEach(button=>button.onclick=jumpUnanswered);

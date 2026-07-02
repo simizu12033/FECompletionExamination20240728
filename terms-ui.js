@@ -1,4 +1,4 @@
-const TERM_STORAGE_KEY="tokurei-fe-20240728-term-progress";
+const TERM_STORAGE_KEY="tokurei-fe-20260614-term-progress";
 const termState={
   filter:"すべて",
   query:"",
@@ -11,6 +11,21 @@ const termStatusLabel={known:"覚えた",shaky:"あやしい",weak:"覚えてい
 const termStatusClass={known:"known",shaky:"shaky",weak:"weak"};
 const termStatusRank={weak:0,shaky:1,known:2};
 const termEsc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const termRegexEsc=s=>String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+
+function maskedMeaning(term){
+  let text=term.meaning;
+  const masks=[
+    term.term,
+    term.term.replace(/[・･].*$/,""),
+    ...(term.tags||[]).filter(tag=>tag!==term.field)
+  ].filter(Boolean).sort((a,b)=>b.length-a.length);
+  [...new Set(masks)].forEach(word=>{
+    if(word.length<2)return;
+    text=text.replace(new RegExp(termRegexEsc(word),"g"),"【　　　】");
+  });
+  return text;
+}
 
 function saveTermProgress(){
   localStorage.setItem(TERM_STORAGE_KEY,JSON.stringify(termState.progress));
@@ -29,7 +44,7 @@ function filteredTerms(){
   });
 }
 function weakTermsFromAnswers(){
-  const answers=JSON.parse(localStorage.getItem("tokurei-fe-20240728-answers")||"{}");
+  const answers=JSON.parse(localStorage.getItem("tokurei-fe-20260614-answers")||"{}");
   if(typeof QUESTIONS==="undefined")return [];
   return TERMS.filter(t=>{
     const q=QUESTIONS.find(x=>x.n===t.q);
@@ -90,8 +105,8 @@ function renderTerms(){
       </div>
       <button class="term-flip" type="button" aria-expanded="${termState.flipped}">
         <span class="term-face front">
-          <small>この説明に答えられる？</small>
-          <strong>${termEsc(active.prompt)}</strong>
+          <small>この説明に当てはまる重要用語は？</small>
+          <strong class="term-question">${termEsc(maskedMeaning(active))}</strong>
           <em>クリックして答えを見る</em>
         </span>
         <span class="term-face back">
